@@ -19,6 +19,26 @@
  	<select id="getEmpList" resultMap ="empResult">
  		select ename name, mgr manager, sal salary 
  		from emp
- 	</select>			
+ 	</select>	
+	<resultMap id="buyRst" type="buyinfo">
+		<association property="member" javaType="member">	
+			<result column="mid" property="id"/>
+			<result column="pass" property="pass"/>			
+			<result column="name" property="name"/>
+			<result column="auth" property="auth"/>
+		</association>	
+		<association property="product"  javaType="product">	
+			<result column="pname" property="name"/>
+			<result column="price" property="price"/>
+			<result column="bcnt" property="bcnt"/>
+		</association>	
+	</resultMap>	
+	<select id="getBuyInfo" resultMap ="buyRst">
+		SELECT p.name pname, price, m.mid, m.name, 
+				pass, auth, b.bcnt
+		FROM product111 p, member111 m, buyinfo111 b
+		WHERE p.pid = b.pid and m.mid=b.mid 	
+	</select>	
+ 			
 </mapper>		
 		
