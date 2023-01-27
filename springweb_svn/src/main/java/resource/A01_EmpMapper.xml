@@ -22,6 +22,7 @@
 		<if test="deptno != 0">
 		and e.deptno = #{deptno}	
 		</if>
+		order by e.deptno, e.mgr, e.job
 	</select>
 	<select id="getDeptComb" resultType="dept">
 		select deptno, dname
