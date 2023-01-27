@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import springweb.a05_mvc.a03_dao.A01_EmpDao;
+import springweb.z01_vo.Code;
+import springweb.z01_vo.Dept;
 import springweb.z01_vo.Emp;
 
 @Service
@@ -19,4 +21,14 @@ public class A01_EmpService {
 		if(sch.getToSal()==0) sch.setToSal(9999);
 		return dao.getEmpList(sch);
 	}	
+	public List<Dept> getDeptComb(){
+		return dao.getDeptComb();
+	}
+	public List<Code> getMgrComb(){
+		return dao.getMgrComb();
+	}
+	public List<String> getJobComb(){
+		return dao.getJobComb();
+	}		
+	
 }
