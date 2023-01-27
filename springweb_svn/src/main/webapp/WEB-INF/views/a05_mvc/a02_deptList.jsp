@@ -41,14 +41,21 @@
 
 </div>
 <div class="container">
-	<form id="frm01" class="form-inline"  method="post">
+	<form id="frm01" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="부서명입력" />
-	    <input class="form-control mr-sm-2" placeholder="부서위치입력" />
+	    <input name="dname" value="${sch.dname}" class="form-control mr-sm-2" placeholder="부서명입력" />
+	    <input name="loc" value="${sch.loc}" class="form-control mr-sm-2" placeholder="부서위치입력" />
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
+    <tbody>
+    	<c:forEach var="dept" items="${dlist}">
+    	<tr><td>${dept.deptno}</td><td>${dept.dname}</td>
+    		<td>${dept.loc }</td></tr>
+    	</c:forEach>
+    </tbody>   
+   
    	<col width="33%">
    	<col width="33%">
    	<col width="33%">
@@ -60,9 +67,7 @@
         <th>부서위치</th>
       </tr>
     </thead>	
-    <tbody>
-    	<tr><td></td><td></td><td></td></tr>
-    </tbody>
+
 	</table>    
     
 </div>
