@@ -11,7 +11,13 @@
 		select * 
 		from emp100
 		where ename like '%'||#{ename}||'%'
-		and job like '%'||#{job}||'%'	
+		and job like '%'||#{job}||'%'
+		<if test='mgr != 0'>
+		and mgr = #{mgr}
+		</if>
+		<if test="deptno != 0">
+		and deptno = #{deptno}	
+		</if>
 	</select>
 	<select id="getDeptComb" resultType="dept">
 		select deptno, dname

@@ -63,15 +63,6 @@
 	    	<option>${job}</option>
 	    	</c:forEach>
 	    </select>
-		<%-- 
-		$("[name=deptno]").val("${sch.deptno}");
-		$("[name=mgr]").val("${sch.mgr}");
-		$("[name=job]").val("${sch.job}");
-		
-		
-		--%>	    
-	    
-	    
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
