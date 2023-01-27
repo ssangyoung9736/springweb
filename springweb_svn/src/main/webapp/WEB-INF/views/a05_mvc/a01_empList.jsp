@@ -28,9 +28,9 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		<%-- 
-		
-		--%>	
+		$("[name=deptno]").val("${sch.deptno}");
+		$("[name=mgr]").val("${sch.mgr}");
+		$("[name=job]").val("${sch.job}");	
 	});
 </script>
 </head>
@@ -62,7 +62,13 @@
 	    	<option>${job}</option>
 	    	</c:forEach>
 	    </select>
-	    
+		<%-- 
+		$("[name=deptno]").val("${sch.deptno}");
+		$("[name=mgr]").val("${sch.mgr}");
+		$("[name=job]").val("${sch.job}");
+		
+		
+		--%>	    
 	    
 	    
 	    <button class="btn btn-info" type="submit">Search</button>
