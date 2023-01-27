@@ -422,7 +422,7 @@
 				FROM emp100
 			</select>
 		service
-		controller - modelattribute	
+		controller - modelattribute	deptCom, mgrCom jobCom
 		
 		
 2. 사원정보 조회
