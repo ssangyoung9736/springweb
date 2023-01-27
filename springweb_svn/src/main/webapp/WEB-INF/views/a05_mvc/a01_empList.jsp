@@ -28,6 +28,7 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		//alert("${sch.deptno},${sch.mgr},${sch.job}")
 		$("[name=deptno]").val("${sch.deptno}");
 		$("[name=mgr]").val("${sch.mgr}");
 		$("[name=job]").val("${sch.job}");	
