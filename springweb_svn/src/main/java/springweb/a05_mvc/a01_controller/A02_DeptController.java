@@ -3,7 +3,7 @@ package springweb.a05_mvc.a01_controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Controller("mydeptCtrl")
 public class A02_DeptController {
 
 	
