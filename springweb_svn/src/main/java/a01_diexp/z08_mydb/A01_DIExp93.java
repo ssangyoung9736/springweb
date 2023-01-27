@@ -6,7 +6,9 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import a01_diexp.z08_mydb.vo.BuyInfo;
+import a01_diexp.z08_mydb.vo.Dept;
 import a01_diexp.z08_mydb.vo.Emp;
+import a01_diexp.z08_mydb.vo.EmpDeptCom;
 import a01_diexp.z08_mydb.vo.Salgrade;
 
 public class A01_DIExp93 {
@@ -33,6 +35,25 @@ public class A01_DIExp93 {
 			System.out.print(e.getJob()+"\t");
 			System.out.print(e.getSal()+"\n");
 		}
+		System.out.println("#부서 정보#");
+		for(Dept d:dao.getDeptList()) {
+			System.out.print(d.getDeptno()+"\t");
+			System.out.print(d.getDname()+"\t");
+			System.out.println(d.getLoc()+"\t");
+		}
+		System.out.println("# 사원 부서 정보 건수:"+dao.getEempDeptList().size());
+		for(EmpDeptCom com:dao.getEempDeptList()) {
+			System.out.print(com.getEmp().getEname()+"\t");
+			System.out.print(com.getDept().getDname()+"\n");
+		}
+		// ex) emp와 salgrade를 join하여 복합 EmpSalGd VO를 만들어 처리하세요.
+		System.out.println("# 급여 등급 정보 건수:"+dao.getEmpSalgrade().size());
+		System.out.println("# 사원 등록 #");
+		dao.insertEmp(new Emp(0,"정길동","과장",7780,null,5000,1000,10));
+		
+		Emp emp = dao.getEmp(7499);  System.out.println("사원명:"+emp.getEname());		
+		System.out.println("#데이터 삭제#");
+		dao.deleteEmp(1001);
 		List<BuyInfo> blist = dao.getBuyInfo();
 		System.out.println("구매건수:"+blist.size());
 		for(BuyInfo bi:blist) {
