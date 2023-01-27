@@ -390,9 +390,16 @@
 # 사원정보 관리
 1. 공통처리
 	1) combo형 데이터 처리 : 공통 modelAttribute로 설정
-		- 부서정보
-		- 관리자정보
-		- 직책정보
+		- 부서정보 Dept(deptno, dname)
+			select deptno, dname
+			from dept100;
+			 
+		- 관리자정보 Code(key, val)
+			
+		- 직책정보  String
+		
+		
+		
 2. 사원정보 조회
 	검색 : 사원명, 직책명(combo), 부서명(combo), 관리자명(combo)
 	사원번호 사원명 부서명 관리자명 직책명 
