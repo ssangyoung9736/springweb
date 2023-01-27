@@ -374,10 +374,28 @@ mapper
 		
 2. DB 처리
 	1) sql
+		select *
+		from dept100
+		where dname like '%'||''||'%'
+		and loc like '%'||''||'%'
 	2) vo
+		dept
 	3) dao(인터페이스)
-	4) 공통 mybatis 설정 : 
+		A02_DeptDao.java
+			public List<Dept> getDeptList();
+	4) 공통 mybatis 설정 :
+		vo : dept
+		mapper: DeptMapper 
 	5) mapper처리
+		namespace : @@@@.A02_DeptDao
+		<select id="getDeptList" resultType="dept">
+			select *
+			from dept100
+			where dname like '%'||#{dname}||'%'
+			and loc like '%'||#{loc}||'%'			
+	
+==========================================	
+	
 3. service 호출
 	1) 중간에 요청값 변경 처리 등등..비지니스 로직/알고리즘 처리
 4. controller단 model데이터 설정.
