@@ -409,8 +409,19 @@
 		공통 mybatis  code		
 		mapper
 			<select id="getDeptComb" resultType="dept">
+				select deptno, dname
+				from dept100
+			</select>	
 			<select id="getMgrComb" resultType="code">
+				SELECT DISTINCT e.mgr key, m.ename val
+				FROM emp100 e, emp100 m
+				WHERE e.mgr = m.empno				
+			</select>
 			<select id="getJobComb" resultType="string">
+				SELECT DISTINCT job
+				FROM emp100
+			</select>
+						
 				
 		
 		service

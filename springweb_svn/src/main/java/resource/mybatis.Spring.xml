@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="emp" type="springweb.z01_vo.Emp"/>
 		<typeAlias alias="dept" type="springweb.z01_vo.Dept"/>
+		<typeAlias alias="code" type="springweb.z01_vo.Code"/>
 	</typeAliases>
 	<!-- 2. 사용 XXXMapper.xml을 추가(dao와 mapper 1:1) -->
 	<mappers>
