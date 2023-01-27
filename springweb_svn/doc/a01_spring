@@ -390,14 +390,31 @@
 # 사원정보 관리
 1. 공통처리
 	1) combo형 데이터 처리 : 공통 modelAttribute로 설정
+		sql
 		- 부서정보 Dept(deptno, dname)
 			select deptno, dname
 			from dept100;
-			 
 		- 관리자정보 Code(key, val)
-			
+			SELECT DISTINCT e.mgr key, m.ename val
+			FROM emp100 e, emp100 m
+			WHERE e.mgr = m.empno
 		- 직책정보  String
+			SELECT DISTINCT job
+			FROM emp100;		
+		vo Code
+		dao
+			public List<Dept> getDeptComb();
+			public List<Code> getMgrComb();
+			public List<String> getJobComb();	
+		공통 mybatis  code		
+		mapper
+			<select id="getDeptComb" resultType="dept">
+			<select id="getMgrComb" resultType="code">
+			<select id="getJobComb" resultType="string">
+				
 		
+		service
+		controller - modelattribute	
 		
 		
 2. 사원정보 조회
