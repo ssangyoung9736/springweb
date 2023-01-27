@@ -416,8 +416,26 @@ mapper
 	모델 데이터와 요청값에 대한 설정 처리
 	모델 데이터 화면 출력
 	
-	
-
+# 동적 query 처리
+		select * 
+		from emp100
+		where ename like '%'||#{ename}||'%'
+		and job like '%'||#{job}||'%'
+		<if test='mgr != 0'>
+		and mgr = #{mgr}
+		</if>
+		<if test="deptno != 0">
+		and deptno = #{deptno}	
+		</if>	
+1. mybatis에서는 조건에 따라 sql문장이 변경되는 동적 query를 지원한다.
+2. 위 같이 sch.getMgr()==0 인 경우에는 and mgr = #{mgr}  구문을
+	배제시킨다.
+ex) deptno가 10번이고,  mgr이 0인 경우(관리자를 전체선택)
+		select * 
+		from emp100
+		where ename like '%'||#{ename}||'%'
+		and job like '%'||#{job}||'%'
+		and deptno = 10	
 
 	
 					

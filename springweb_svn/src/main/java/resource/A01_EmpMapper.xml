@@ -7,16 +7,20 @@
 		인터페이스를 상속받은 실제 Dao객체를 위 규칙에 생성하는 xml파일..
 		-->
 <mapper namespace="springweb.a05_mvc.a03_dao.A01_EmpDao">
+
+
 	<select id="getEmpList"  resultType="emp" parameterType="emp">
-		select * 
-		from emp100
-		where ename like '%'||#{ename}||'%'
-		and job like '%'||#{job}||'%'
+		select e.empno, e.ename, d.dname, m.ename mename, e.job
+		from emp100 e, emp100 m, dept d
+		where e.mgr = m.empno
+		and e.deptno = d.deptno
+		and e.ename like '%'||#{ename}||'%'
+		and e.job like '%'||#{job}||'%'
 		<if test='mgr != 0'>
-		and mgr = #{mgr}
+		and e.mgr = #{mgr}
 		</if>
 		<if test="deptno != 0">
-		and deptno = #{deptno}	
+		and e.deptno = #{deptno}	
 		</if>
 	</select>
 	<select id="getDeptComb" resultType="dept">

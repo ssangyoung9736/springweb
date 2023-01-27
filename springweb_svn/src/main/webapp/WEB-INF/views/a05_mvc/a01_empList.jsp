@@ -77,17 +77,22 @@
       <tr class="table-success text-center">
         <th>사원번호</th>
         <th>사원명</th>
+        <th>부서명</th>
+        <th>관리자명</th>
         <th>직책명</th>
-        <th>입사일</th>
-        <th>급여</th>
       </tr>
-    </thead>	
+    </thead>
+    <!-- 
+    사원번호 사원명 부서명 관리자명 직책명 
+     -->	
     <tbody>
     	<c:forEach var="emp" items="${empList}">
     	<tr><td>${emp.empno}</td><td>${emp.ename}</td>
+    		<td>${emp.dname}</td>
+    		<td>${emp.mename}</td>
     		<td>${emp.job}</td>
-    		<td><fmt:formatDate value="${emp.hiredate}"/></td>
-    		<td><fmt:formatNumber value="${emp.sal}"/></td></tr>
+    		
+    		</tr>
     	</c:forEach>
     </tbody>
 	</table>    

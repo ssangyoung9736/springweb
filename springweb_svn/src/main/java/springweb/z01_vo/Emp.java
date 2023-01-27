@@ -5,6 +5,7 @@ import java.util.Date;
 public class Emp {
 	private int empno;
 	private String ename;
+	private String mename;
 	private String job;
 	private int mgr;
 	private Date hiredate;
@@ -15,6 +16,8 @@ public class Emp {
 	private double toSal;
 	private double comm;
 	private int deptno;
+	private String dname;
+	
 	public Emp() {
 		// TODO Auto-generated constructor stub
 	}
@@ -156,6 +159,26 @@ public class Emp {
 	}
 	public void setJob(String job) {
 		this.job = job;
+	}
+
+
+	public String getMename() {
+		return mename;
+	}
+
+
+	public void setMename(String mename) {
+		this.mename = mename;
+	}
+
+
+	public String getDname() {
+		return dname;
+	}
+
+
+	public void setDname(String dname) {
+		this.dname = dname;
 	}
 	
 }
