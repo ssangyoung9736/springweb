@@ -21,7 +21,8 @@ FROM product111 p, member111 m, buyinfo111 b
 WHERE p.pid = b.pid and m.mid=b.mid;
 
 vo Member(id, pass, name, auth)
-   Product(name, price, bcnt) ==> BuyInfo  Member member; Product product;
+   Product(name, price, bcnt) ==> 
+   BuyInfo  Member member; Product product;
 공통mybatis 
 	member, product, buyinfo	   
 dao 
