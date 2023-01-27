@@ -387,6 +387,10 @@ mapper
 		vo : dept
 		mapper: DeptMapper 
 	5) mapper처리
+	// springweb.a05_mvc.a03_dao.A02_DeptDao
+	public interface A02_DeptDao {
+		public List<Dept> getDeptList();	
+	
 		namespace : @@@@.A02_DeptDao
 		<select id="getDeptList" resultType="dept">
 			select *
