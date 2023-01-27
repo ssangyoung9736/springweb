@@ -29,3 +29,10 @@ insert into buyinfo111 values('1000','himan',5,sysdate);
 SELECT p.*, m.*
 FROM product111 p, member111 m, buyinfo111 b
 WHERE p.pid = b.pid and m.mid=b.mid;
+
+SELECT p.name pname, price,  m.name, auth, b.bcnt
+FROM product111 p, member111 m, buyinfo111 b
+WHERE p.pid = b.pid and m.mid=b.mid;
+
+
+
