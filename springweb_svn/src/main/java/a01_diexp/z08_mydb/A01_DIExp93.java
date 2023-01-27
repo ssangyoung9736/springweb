@@ -1,8 +1,11 @@
 package a01_diexp.z08_mydb;
 
+import java.util.List;
+
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import a01_diexp.z08_mydb.vo.BuyInfo;
 import a01_diexp.z08_mydb.vo.Emp;
 import a01_diexp.z08_mydb.vo.Salgrade;
 
@@ -29,6 +32,13 @@ public class A01_DIExp93 {
 			System.out.print(e.getEname()+"\t");
 			System.out.print(e.getJob()+"\t");
 			System.out.print(e.getSal()+"\n");
+		}
+		List<BuyInfo> blist = dao.getBuyInfo();
+		System.out.println("구매건수:"+blist.size());
+		for(BuyInfo bi:blist) {
+			System.out.print(bi.getMember().getName()+"\t");
+			System.out.print(bi.getProduct().getName()+"\t");
+			System.out.print(bi.getProduct().getBcnt()+"\n");
 		}
 		System.out.println("종료");
 		ctx.close();
