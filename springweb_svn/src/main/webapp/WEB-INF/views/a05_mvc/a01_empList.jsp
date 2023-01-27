@@ -39,12 +39,32 @@
 <div class="jumbotron text-center">
   <h2 >사원정보(spring MVC)</h2>
 
-</div>
+</div><!-- // deptCom, mgrCom jobCom -->
 <div class="container">
-	<form id="frm01" class="form-inline"  method="post">
+	<form id="frm01" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input name="ename" value="${sch.ename}" class="form-control mr-sm-2" placeholder="사원명입력" />
-	    <input name="job" value="${sch.job}" class="form-control mr-sm-2" placeholder="직책명입력" />
+	    <select name="deptno" class="form-control mr-sm-2">
+	    	<option value="0">부서선택</option>
+	    	<c:forEach var="d" items="${deptCom}">
+	    	<option value="${d.deptno}">${d.dname}</option>
+	    	</c:forEach>
+	    </select>
+	    <select name="mgr" class="form-control mr-sm-2">
+	    	<option value="0">관리자선택</option>
+	    	<c:forEach var="m" items="${mgrCom}">
+	    	<option value="${m.key}">${m.val}</option>
+	    	</c:forEach>
+	    </select>	    
+	    <select name="job" class="form-control mr-sm-2">
+	    	<option value="">직책선택</option>
+	    	<c:forEach var="job" items="${jobCom}">
+	    	<option>${job}</option>
+	    	</c:forEach>
+	    </select>
+	    
+	    
+	    
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
