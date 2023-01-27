@@ -6,6 +6,10 @@
 	<typeAliases>
 		<typeAlias alias="salgrade" type="a01_diexp.z08_mydb.vo.Salgrade"/>
 		<typeAlias alias="emp" type="a01_diexp.z08_mydb.vo.Emp"/>
+		<typeAlias alias="dept" type="a01_diexp.z08_mydb.vo.Dept"/>
+		<typeAlias alias="empDept" type="a01_diexp.z08_mydb.vo.EmpDeptCom"/>
+		<typeAlias alias="empsal" type="a01_diexp.z08_mydb.vo.EmpSalGd"/>
+		
 		<typeAlias alias="product" type="a01_diexp.z08_mydb.vo.Product"/>
 		<typeAlias alias="member" type="a01_diexp.z08_mydb.vo.Member"/>
 		<typeAlias alias="buyinfo" type="a01_diexp.z08_mydb.vo.BuyInfo"/>
