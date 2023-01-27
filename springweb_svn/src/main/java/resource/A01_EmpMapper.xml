@@ -10,14 +10,14 @@
 
 
 	<select id="getEmpList"  resultType="emp" parameterType="emp">
-		select e.empno, e.ename, d.dname, m.ename mename, e.job
+		select e.empno, e.ename, d.dname, nvl(m.ename,'') mename, e.job
 		from emp100 e, emp100 m, dept d
-		where e.mgr = m.empno
+		where e.mgr = m.empno(+)
 		and e.deptno = d.deptno
 		and e.ename like '%'||#{ename}||'%'
 		and e.job like '%'||#{job}||'%'
 		<if test='mgr != 0'>
-		and e.mgr = #{mgr}
+		and e.mgr = #{mgr}   
 		</if>
 		<if test="deptno != 0">
 		and e.deptno = #{deptno}	
