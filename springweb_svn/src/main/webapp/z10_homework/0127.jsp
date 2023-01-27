@@ -15,6 +15,31 @@
 [1단계:확인] 4. 회원정보(member)를 삭제하는 처리를 하세요
 [3단계:확인] 5. product, member, buyinfo 테이블의 조인관계를 설정하여  BuyProduct VO에 Product, Member 객체를 포함하여 
 				resultMap을 활용한 DB처리를 하세요
+sql				
+SELECT p.name pname, price,  id, m.name, pass, auth, b.bcnt
+FROM product111 p, member111 m, buyinfo111 b
+WHERE p.pid = b.pid and m.mid=b.mid;
+
+vo Member(id, pass, name, auth)
+   Product(name, price, bcnt) ==> BuyInfo  Member member; Product product;
+공통mybatis 
+	member, product, buyinfo	   
+dao 
+	public List<BuyInfo> getBuyInfo();
+mapper
+	<resultMap id="buyRst" type="buyinfo">
+		<association type="member">	
+			<result column="id" property="id"/>
+			<result column="pass" property="pass"/>			
+			<result column="name" property="name"/>
+			<result column="auth" property="auth"/>
+		<association type="product">	
+			<result column="pname" property="name"/>
+			<result column="price" property="price"/>
+			<result column="bcnt" property="bcnt"/>
+main()
+	List<BuyInfo> blist = dao.getBuyInfo();
+
 
 
 
