@@ -33,9 +33,10 @@ public class A03_MemberController {
 	// memberMy.do
 	@GetMapping("/memberMy.do")
 	public String getMember(@RequestParam("id") String id, 
-							@RequestParam(value="proc",defaultValue = "") String proc,
+							@RequestParam("proc") String proc,
 							Model d) {
 		d.addAttribute("mem", service.getMember(id));
+		d.addAttribute("mlist",service.getMemberList(new Member()));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}
 }

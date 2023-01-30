@@ -31,7 +31,8 @@
 		<%-- 
 		$("[name=auth]").val("${sch.auth}")
 		--%>
-		$("[name=auth]").val("${sch.auth}")
+		$("#frm01 [name=auth]").val("${sch.auth}")
+		$("#frm02 [name=auth]").val("${mem.auth}")
 		var proc = "${param.proc}"
 		if(proc=="schOne"){
 			// 요청값으로 단일 검색을 받았을 때, 모달창 로딩
@@ -128,10 +129,10 @@
 	     </div>
 	     <div class="row">
 	      <div class="col">
-	        <input  name="pass" value="${mem.pass}" type="text" class="form-control" placeholder="패스워드 입력" >
+	        <input  name="pass" value="${mem.pass}" type="password" class="form-control" placeholder="패스워드 입력" >
 	      </div>
 	      <div class="col">
-	        <input name="passFrm" value=""  type="text" class="form-control" placeholder="패스워드 확인">
+	        <input name="passFrm" value=""  type="password" class="form-control" placeholder="패스워드 확인">
 	      </div>
 	     </div>
 	     <div class="row">
