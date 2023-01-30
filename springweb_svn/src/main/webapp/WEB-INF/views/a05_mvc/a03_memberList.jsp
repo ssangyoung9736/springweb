@@ -32,7 +32,17 @@
 		$("[name=auth]").val("${sch.auth}")
 		--%>
 		$("[name=auth]").val("${sch.auth}")
+		var proc = "${param.proc}"
+		if(proc=="schOne"){
+			// 요청값으로 단일 검색을 받았을 때, 모달창 로딩
+			$("#modal01").click();
+		}
+		// <p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p>
+				
 	});
+	function goPage(id){
+		location.href="/memberMy.do?id="+id+"&proc=schOne"
+	}	
 </script>
 </head>
 
@@ -72,13 +82,23 @@
     </thead>	
     <tbody>
     	<c:forEach var="mem" items="${mlist}">
-    	<tr><td>${mem.id}</td><td>${mem.name}</td>
+    	<tr onDblclick="goPage(${mem.id })"><td>${mem.id}</td><td>${mem.name}</td>
     		<td>${mem.auth}</td><td>${mem.point}</td></tr>
     	</c:forEach>
     </tbody>
-	</table>    
+	</table>   
+	<script type="text/javascript">
+
+		/*
+		id    name
+		pass  pass확인
+		point auth
+		*/
+	</script>
+	 
     
 </div>
+<p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -88,21 +108,52 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <!-- 
+      	/*
+		id    name
+		pass  pass확인
+		point auth
+		*/
+       -->
       <div class="modal-body">
 		<form id="frm02" class="form"  method="post">
+			<input type="hidden" name="proc"/>
 	     <div class="row">
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
+	        <input name="id" value="${mem.id}" type="text" class="form-control" placeholder="아이디 입력" >
 	      </div>
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
+	        <input name="name" value="${mem.name}"  type="text" class="form-control" placeholder="이름 입력" >
 	      </div>
 	     </div>
+	     <div class="row">
+	      <div class="col">
+	        <input  name="pass" value="${mem.pass}" type="text" class="form-control" placeholder="패스워드 입력" >
+	      </div>
+	      <div class="col">
+	        <input name="passFrm" value=""  type="text" class="form-control" placeholder="패스워드 확인">
+	      </div>
+	     </div>
+	     <div class="row">
+	      <div class="col">
+	        <input name="point" value="${mem.point}" type="text" class="form-control" placeholder="포인트명 입력">
+	      </div>
+	      <div class="col">
+	        <select name="auth" class="form-control mr-sm-2">
+	    	<option value="">권한선택</option>
+	    	<c:forEach var="selAuth" items="${authCom}">
+	    	<option >${selAuth}</option>
+	    	</c:forEach>
+	       	</select>
+	        
+	      </div>
+	     </div>	     	     
 	    </form> 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">수정</button>
+        <button type="button" class="btn btn-warning">삭제</button>
       </div>
     </div>
   </div>
