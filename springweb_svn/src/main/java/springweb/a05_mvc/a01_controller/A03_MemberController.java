@@ -22,8 +22,6 @@ public class A03_MemberController {
 	public List<String> getAuthCom(){
 		return service.getAuthCom();
 	}
-	
-	
 	@RequestMapping("/memberListMy.do")
 	public String memberList(@ModelAttribute("sch") Member sch,
 				Model d) {

@@ -28,8 +28,7 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		<%-- 
-		$("[name=auth]").val("${sch.auth}")
+		<%-- m=auth]").val("${sch.auth}")
 		--%>
 		$("#frm01 [name=auth]").val("${sch.auth}")
 		$("#frm02 [name=auth]").val("${mem.auth}")
