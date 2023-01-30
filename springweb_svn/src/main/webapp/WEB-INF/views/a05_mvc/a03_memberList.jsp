@@ -52,7 +52,7 @@
   <h2 >회원리스트</h2>
 </div>
 <div class="container">
-	<form id="frm01" class="form"  method="post">
+	<form id="frm01" class="form" action="${path}/memberListMy.do" method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input name="id" value="${sch.id}" class="form-control mr-sm-2" placeholder="아이디" />
 	    <input name="name" value="${sch.name}"  class="form-control mr-sm-2" placeholder="이름" />
