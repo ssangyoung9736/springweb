@@ -30,7 +30,6 @@ public class A01_EmpController {
 	public List<String> getJobComb(){
 		return service.getJobComb();
 	}		
-	
 	@RequestMapping("empListMy.do")
 	public String empList(@ModelAttribute("sch")Emp sch,Model d) {
 		System.out.println("부서번호:"+sch.getDeptno());

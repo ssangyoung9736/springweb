@@ -63,6 +63,62 @@ main()
 <script type="text/javascript">
 	$(document).ready(function(){
 		<%-- 
+2023-01-27
+[1단계:개념] 1. db가 연결된 스프링 MVC패턴의 개발 순서를 기술하세요.
+[1단계:확인] 2. 회원관리 화면을 처리하세요(member테이블 활용하여 리스트)
+[1단계:확인] 3. 회원관리 화면을 처리하세요(member테이블 활용하여 단일 데이터 조회)
+[1단계:확인]*4. 회원관리 화면을 처리하세요(member테이블 활용하여 수정)
+[1단계:확인]*5. 회원관리 화면을 처리하세요(member테이블 활용하여 삭제)
+[1단계:개념] 6. 모델어트리뷰트로 콤보박스를 사용하는 경우 처리하는 순서를 기술하세요.
+[1단계:확인]*7. 회원테이블(member)에 권한을 콤보박스를 사용하여 검색조건으로 추가하여 처리하세요.
+sql
+	SELECT DISTINCT auth
+	FROM member200	
+
+	select * from member200
+	where id like '%'||#{id}||'%'
+	and name like '%'||#{name}||'%'
+	<if test="auth!=''">
+	and auth = #{auth}
+	</if>
+	select * from member200
+	where id = #{id}	
+	update member
+		set name=#{name},
+			pass=#{pass},
+			point=#{point},
+			auth=#{auth}
+		where id = #{id}
+	delete member 
+	where id = #{id}
+vo Member
+공통mybatis member
+dao  
+public List<String> getAuthCom();	
+public List<Member> getMemberList(Member sch);	
+public Member getMember(String id);	
+public void uptMember(Member upt);	
+public void delMember(String id);
+mapper
+<select id="getAuthCom" resultType="string">
+	SELECT DISTINCT auth
+	FROM member200
+<select id="getMemberList" parameteType="member"
+	 resultType="member">
+<select id="getMember" parameteType="string">
+<update id="uptMember"  parameteType="member">
+<delete id="delMember" parameteType="string">
+
+		
+	
+	
+	
+	
+	
+	
+
+
+
 		
 		--%>	
 	});

@@ -30,6 +30,8 @@
 	$(document).ready(function(){
 		//alert("${sch.deptno},${sch.mgr},${sch.job}")
 		$("[name=deptno]").val("${sch.deptno}");
+		// document.querySelector("[name=deptno]").value='${sch.deptno}'(X)
+		
 		$("[name=mgr]").val("${sch.mgr}");
 		$("[name=job]").val("${sch.job}");	
 	});

@@ -190,7 +190,7 @@
 	2) 해당 패키지에 클래스 생성시,component-scan
 		에서 지정한 annotation 설정
 	3) 주입할 객체 생성시,
-		@Autowired
+		@Autowired(required=false)
 		private 클래스명 참조명;
 	4) 위 annotation 옵션으로 new 생성자() 없이도, 	
 		컨테이너에 있는 객체가 해당 객체에 자동으로 주입된다.

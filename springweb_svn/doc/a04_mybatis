@@ -41,10 +41,14 @@
 		- 요소객체 안에 사용할 sql 처리..	 	
 		- 메서드명 ==> id
 		- 메서드의 매개변수 ==> parameterType
-		- 메서드의 리턴값 ==> resultType
-	5) service에서dao호출
+		- 메서드의 리턴값 ==> resultType//resultMap
+	5) service에서 dao호출
+	
 	6) controller에서 service호출
+	
 	7) controller에 요청 및 모델데이터 선언
+	
+	
 	8) view(jsp) 구현 모델데이터 출력..	
 # mybatis 프레임웍크 연습
 1. 단일 리턴값 가져오기
@@ -227,13 +231,26 @@
 4. 다중 매개변수(객체) 입력하기
 	1) dao
 		public void insertEmp(Emp ins);
+		public void insertEmp2(Map<String> map);
 	2) mapper
 		<insert id="insertEmp" parameterType="emp">
 			insert into emp100
 			values(emp_seq.nextval, #{ename},#{job}, 
 			#{mgr}, sysdate, #{sal},#{comm},#{deptno})
 		</insert>	
-	dao.insertEmp(new Emp(0,"정길동","과장",7780,null,5000,1000,10));		
+		<insert id="insertEmp2" parameterType="map">
+			insert into emp100
+			values(emp_seq.nextval, #{ename},#{job}, 
+			#{mgr}, sysdate, #{sal},#{comm},#{deptno})
+		</insert>
+	3) service			
+		dao.insertEmp(new Emp(0,"정길동","과장",7780,null,5000,1000,10));
+		Map<String,String> map = new HashMap<String,String>();	
+		map.put("ename","홍길동");
+		map.put("job","사원");
+		map.put("mgr","8888");
+		...
+		dao.insertEmp2(map);		
 5. 단일 리턴값, 단일 매개변수 처리
 6. 다중 리턴값, 다중 매개변수 처리
 7. 조회 처리하기
