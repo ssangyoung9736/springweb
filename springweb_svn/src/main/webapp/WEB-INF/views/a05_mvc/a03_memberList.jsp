@@ -57,9 +57,15 @@
 				$("#frm02").attr("action","${path}/memberUpt.do");
 				$("#frm02").submit();
 			}
-			
 		})
-		
+		// /memberUpt.do /memberDel.do
+		$("#delBtn").click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				$("[name=proc]").val("del");
+				$("#frm02").attr("action","${path}/memberDel.do");
+				$("#frm02").submit();
+			}			
+		})
 				
 	});
 	function goPage(id){
