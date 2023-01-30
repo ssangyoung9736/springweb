@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +30,11 @@ public class A03_MemberController {
 		d.addAttribute("mlist",service.getMemberList(sch));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}
-	@RequestMapping("/memberMy.do")
-	public String getMember(@RequestParam("id") String id, Model d) {
+	// memberMy.do
+	@GetMapping("/memberMy.do")
+	public String getMember(@RequestParam("id") String id, 
+							@RequestParam(value="proc",defaultValue = "") String proc,
+							Model d) {
 		d.addAttribute("mem", service.getMember(id));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}

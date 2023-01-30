@@ -41,7 +41,7 @@
 				
 	});
 	function goPage(id){
-		location.href="/memberMy.do?id="+id+"&proc=schOne"
+		location.href="${path}/memberMy.do?id="+id+"&proc=schOne"
 	}	
 </script>
 </head>
@@ -82,7 +82,7 @@
     </thead>	
     <tbody>
     	<c:forEach var="mem" items="${mlist}">
-    	<tr onDblclick="goPage(${mem.id })"><td>${mem.id}</td><td>${mem.name}</td>
+    	<tr onDblclick="goPage('${mem.id }')"><td>${mem.id}</td><td>${mem.name}</td>
     		<td>${mem.auth}</td><td>${mem.point}</td></tr>
     	</c:forEach>
     </tbody>
@@ -103,7 +103,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">타이틀</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">회원상세</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
