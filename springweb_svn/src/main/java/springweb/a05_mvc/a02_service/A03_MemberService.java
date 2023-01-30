@@ -16,9 +16,9 @@ public class A03_MemberService {
 		return dao.getAuthCom();
 	}
 	public List<Member> getMemberList(Member sch){
-		if(sch.getId()!=null) sch.setId("");
-		if(sch.getName()!=null) sch.setName("");
-		if(sch.getAuth()!=null) sch.setAuth("");
+		if(sch.getId()==null) sch.setId("");
+		if(sch.getName()==null) sch.setName("");
+		if(sch.getAuth()==null) sch.setAuth("");
 		return dao.getMemberList(sch);
 	}	
 	public Member getMember(String id) {
