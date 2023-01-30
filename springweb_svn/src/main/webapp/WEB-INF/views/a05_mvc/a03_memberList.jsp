@@ -38,6 +38,17 @@
 			// 요청값으로 단일 검색을 받았을 때, 모달창 로딩
 			$("#modal01").click();
 		}
+		if(proc=="upt"){
+			if(confirm("수정성공!\n조회화면이동하시겠습니까?")){
+				$("#frm01").submit()
+			}
+		}
+		if(proc=="del"){
+			alert("삭제성공!\n조회화면이동!")
+			$("#frm01").submit()
+			
+		}
+		
 		// <p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p># id="uptBtn" ")
 		//  id="uptBtn" 
 		$("#upBtn").click(function(){
@@ -58,6 +69,8 @@
 				$("#frm02").submit();
 			}
 		})
+		
+		
 		// /memberUpt.do /memberDel.do
 		$("#delBtn").click(function(){
 			if(confirm("삭제하시겠습니까?")){
