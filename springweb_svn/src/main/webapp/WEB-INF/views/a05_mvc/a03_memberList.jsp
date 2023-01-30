@@ -43,8 +43,8 @@
 <div class="container">
 	<form id="frm01" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input name="id" class="form-control mr-sm-2" placeholder="아이디" />
-	    <input name="name" class="form-control mr-sm-2" placeholder="이름" />
+	    <input name="id" value="${sch.id}" class="form-control mr-sm-2" placeholder="아이디" />
+	    <input name="name" value="${sch.name}"  class="form-control mr-sm-2" placeholder="이름" />
 	    <select name="auth" class="form-control mr-sm-2">
 	    	<option value="">권한선택</option>
 	    	<c:forEach var="selAuth" items="${authCom}">
