@@ -476,7 +476,14 @@
 1. 뷰단에 대한 여러가지 형식을 지정하여 처리하는 lib를 말한다.
 2. container에서 default 웹화면 html, jsp를 지원하고 있다.
 3. 컨트롤러에서 마지막 리턴값으로 형식으로 호출
-	return "화면단" : 
+	return "화면단" :
+	ex)
+	@RequestMapping("/memberListMy.do")
+	public String memberList(@ModelAttribute("sch") Member sch,
+		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
+			==> View
+	}	
+	 
 4. 이외에서 container 설정에 따라서, 여러가지 viewer를 viewresolver로 
 	설정이 가능하다.
 	뷰리졸버로 설정하는 것들은 파일다운로드, 파일업로드, 엑셀/pdf다운로드,
@@ -485,9 +492,29 @@
 	1) 1순위로 컨테이너에 bean 으로 viewer를 선언했을 때, 처리되게 선언
 	2) 그외는 html이나 jsp가 로딩되게 처리..
 	ex) 100개의 구슬 97개는 파랑색 구슬, 3개만 빨강,노랑,초록
-	
-
-
+	ex) 기본 jsp view
+		ex)
+		@RequestMapping("/memberListMy.do")
+		public String memberList(@ModelAttribute("sch") Member sch,
+			return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
+				==> View
+		}	
+		결과 웹 jsp화면이 로딩		
+	ex) 다운로드 view
+		<bean id="download" class="@@@@@.@@@@"
+		@RequestMapping("/download.do")
+		public String memberList(@RequestParam("fname") String fname
+			return "download"; ==> View
+		}	
+		처리결과 : 파일이 다운로드
+    ex) json view
+		<bean id="jsonView" class="@@@@@.@@@@"
+		@RequestMapping("/jsonCall.do")
+		public String memberList(@RequestParam("fname") String fname
+			return "jsonView"; ==> View
+		}    	
+		처리결과 : json 데이터가 웹화면에 로딩
+		{"name":"홍길동"}		
 
 
 
