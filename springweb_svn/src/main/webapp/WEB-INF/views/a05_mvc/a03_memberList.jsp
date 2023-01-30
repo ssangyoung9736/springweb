@@ -29,8 +29,9 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		<%-- 
-		
-		--%>	
+		$("[name=auth]").val("${sch.auth}")
+		--%>
+		$("[name=auth]").val("${sch.auth}")
 	});
 </script>
 </head>
@@ -38,36 +39,42 @@
 <body>
 <div class="jumbotron text-center">
   <h2 >회원리스트</h2>
-
 </div>
 <div class="container">
-	<form id="frm01" class="form-inline"  method="post">
+	<form id="frm01" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="제목" />
-	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <input name="id" class="form-control mr-sm-2" placeholder="아이디" />
+	    <input name="name" class="form-control mr-sm-2" placeholder="이름" />
+	    <select name="auth" class="form-control mr-sm-2">
+	    	<option value="">권한선택</option>
+	    	<c:forEach var="selAuth" items="${authCom}">
+	    	<option >${selAuth}</option>
+	    	</c:forEach>
+	    </select>
+	    <%-- $("[name=auth]").val("${sch.auth}") --%>
+	    
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
    <table class="table table-hover table-striped">
-   	<col width="10%">
-   	<col width="50%">
-   	<col width="15%">
-   	<col width="15%">
-   	<col width="10%">
+   	<col width="25%">
+   	<col width="25%">
+   	<col width="25%">
+   	<col width="25%">
     <thead>
     
       <tr class="table-success text-center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회</th>
+        <th>아이디</th>
+        <th>이름</th>
+        <th>권한</th>
+        <th>포인트</th>
       </tr>
     </thead>	
     <tbody>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
+    	<c:forEach var="mem" items="${mlist}">
+    	<tr><td>${mem.id}</td><td>${mem.name}</td>
+    		<td>${mem.auth}</td><td>${mem.point}</td></tr>
+    	</c:forEach>
     </tbody>
 	</table>    
     
