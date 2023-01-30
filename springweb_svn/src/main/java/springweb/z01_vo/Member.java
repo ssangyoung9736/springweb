@@ -1,5 +1,5 @@
 package springweb.z01_vo;
-//jspexp.vo.Member 
+//springweb.z01_vo.Member 
 public class Member {
 /*
 create table member(

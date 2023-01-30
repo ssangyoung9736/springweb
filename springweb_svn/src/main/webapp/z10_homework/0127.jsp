@@ -92,8 +92,10 @@ sql
 	delete member 
 	where id = #{id}
 vo Member
-공통mybatis member
+	springweb.z01_vo.Member 
+공통mybatis member, MemberMapper.xml
 dao  
+MemberDao
 public List<String> getAuthCom();	
 public List<Member> getMemberList(Member sch);	
 public Member getMember(String id);	
@@ -105,10 +107,29 @@ mapper
 	FROM member200
 <select id="getMemberList" parameteType="member"
 	 resultType="member">
-<select id="getMember" parameteType="string">
-<update id="uptMember"  parameteType="member">
-<delete id="delMember" parameteType="string">
+	select * from member200
+	where id like '%'||#{id}||'%'
+	and name like '%'||#{name}||'%'
+	<if test="auth!=''">
+	and auth = #{auth}
+	</if>
+		 
+<select id="getMember" parameteType="string" 
+	resultType="member>
+	select * from member200
+	where id = #{id}	
 
+<update id="uptMember"  parameteType="member">
+	update member
+		set name=#{name},
+			pass=#{pass},
+			point=#{point},
+			auth=#{auth}
+		where id = #{id}
+		
+<delete id="delMember" parameteType="string">
+	delete member 
+	where id = #{id}
 		
 	
 	
