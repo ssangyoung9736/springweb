@@ -82,7 +82,7 @@
 		<property name="order" value="1"/>
 	</bean>
 	<!-- 위에서 1순위 채택하는 json viewer -->
-	<bean id="pagJsonReport" class=
+	<bean id="pageJsonReport" class=
 "org.springframework.web.servlet.view.json.MappingJackson2JsonView">
 		<property name="contentType" 
 			value="text/html;charset=utf-8"/>	
