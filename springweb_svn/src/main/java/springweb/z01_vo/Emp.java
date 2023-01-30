@@ -2,6 +2,7 @@ package springweb.z01_vo;
 // jspexp.vo.Emp
 import java.util.Date;
 
+
 public class Emp {
 	private int empno;
 	private String ename;
@@ -9,7 +10,6 @@ public class Emp {
 	private String job;
 	private int mgr;
 	private Date hiredate;
-	private	long hiredateTime;
 	private String hiredateS;
 	private double sal;
 	private double frSal;
