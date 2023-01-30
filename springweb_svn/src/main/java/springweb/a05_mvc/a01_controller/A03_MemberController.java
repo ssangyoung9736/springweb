@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import springweb.a05_mvc.a02_service.A03_MemberService;
 import springweb.z01_vo.Member;
@@ -26,6 +27,11 @@ public class A03_MemberController {
 	public String memberList(@ModelAttribute("sch") Member sch,
 				Model d) {
 		d.addAttribute("mlist",service.getMemberList(sch));
+		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
+	}
+	@RequestMapping("/memberMy.do")
+	public String getMember(@RequestParam("id") String id, Model d) {
+		d.addAttribute("mem", service.getMember(id));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}
 }
