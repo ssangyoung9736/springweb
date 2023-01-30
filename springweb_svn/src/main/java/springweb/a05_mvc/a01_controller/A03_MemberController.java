@@ -33,7 +33,6 @@ public class A03_MemberController {
 	// memberMy.do
 	@GetMapping("/memberMy.do")
 	public String getMember(@RequestParam("id") String id, 
-							@RequestParam("proc") String proc,
 							Model d) {
 		d.addAttribute("mem", service.getMember(id));
 		d.addAttribute("mlist",service.getMemberList(new Member()));

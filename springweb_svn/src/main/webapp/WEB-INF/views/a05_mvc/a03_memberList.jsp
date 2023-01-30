@@ -38,7 +38,28 @@
 			// 요청값으로 단일 검색을 받았을 때, 모달창 로딩
 			$("#modal01").click();
 		}
-		// <p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p>
+		// <p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p># id="uptBtn" ")
+		//  id="uptBtn" 
+		$("#upBtn").click(function(){
+			var passVal=$("[name=pass]").val()
+			var passFrmVal = $("#passFrm").val()
+			if(passVal!=passFrmVal){
+				alert("패스워드 패드워드 확인 동일하여야 합니다.")
+				return;
+			}
+			var authVal = $("[name=auth]").val()
+			if(authVal==""){
+				alert("권한을 선택하여야 합니다.")
+				return;
+			}
+			if(confirm("수정하시겠습니까?")){
+				$("[name=proc]").val("upt");
+				$("#frm02").attr("action","${path}/memberUpt.do");
+				$("#frm02").submit();
+			}
+			
+		})
+		
 				
 	});
 	function goPage(id){
@@ -132,7 +153,7 @@
 	        <input  name="pass" value="${mem.pass}" type="password" class="form-control" placeholder="패스워드 입력" >
 	      </div>
 	      <div class="col">
-	        <input name="passFrm" value=""  type="password" class="form-control" placeholder="패스워드 확인">
+	        <input id="passFrm" value=""  type="password" class="form-control" placeholder="패스워드 확인">
 	      </div>
 	     </div>
 	     <div class="row">
@@ -153,8 +174,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">수정</button>
-        <button type="button" class="btn btn-warning">삭제</button>
+        <button id="uptBtn" type="button" class="btn btn-primary">수정</button>
+        <button id="delBtn" type="button" class="btn btn-warning">삭제</button>
       </div>
     </div>
   </div>
