@@ -34,7 +34,7 @@
 		$("#frm01 [name=auth]").val("${sch.auth}")
 		$("#frm02 [name=auth]").val("${mem.auth}")
 		var proc = "${param.proc}"
-		if(proc=="schOne"){
+		if(proc!=""){
 			// 요청값으로 단일 검색을 받았을 때, 모달창 로딩
 			$("#modal01").click();
 		}
@@ -51,20 +51,24 @@
 		
 		// <p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p># id="uptBtn" ")
 		//  id="uptBtn" 
-		$("#upBtn").click(function(){
-			var passVal=$("[name=pass]").val()
-			var passFrmVal = $("#passFrm").val()
+		// uptBtn
+		$("#uptBtn").click(function(){
+			console.log("#1")
+			var passVal=$("#frm02 [name=pass]").val()
+			var passFrmVal = $("#frm02 #passFrm").val()
 			if(passVal!=passFrmVal){
 				alert("패스워드 패드워드 확인 동일하여야 합니다.")
 				return;
 			}
-			var authVal = $("[name=auth]").val()
+			console.log("#2")
+			var authVal = $("#frm02 [name=auth]").val()
 			if(authVal==""){
 				alert("권한을 선택하여야 합니다.")
 				return;
 			}
+			console.log("#3")
 			if(confirm("수정하시겠습니까?")){
-				$("[name=proc]").val("upt");
+				$("#frm02 [name=proc]").val("upt");
 				$("#frm02").attr("action","${path}/memberUpt.do");
 				$("#frm02").submit();
 			}
@@ -74,7 +78,7 @@
 		// /memberUpt.do /memberDel.do
 		$("#delBtn").click(function(){
 			if(confirm("삭제하시겠습니까?")){
-				$("[name=proc]").val("del");
+				$("#frm02 [name=proc]").val("del");
 				$("#frm02").attr("action","${path}/memberDel.do");
 				$("#frm02").submit();
 			}			

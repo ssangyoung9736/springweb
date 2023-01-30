@@ -38,4 +38,17 @@ public class A03_MemberController {
 		d.addAttribute("mlist",service.getMemberList(new Member()));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}
+	// /memberUpt.do /memberDel.do
+	@RequestMapping("/memberUpt")
+	public String memberUpt(Member upt, Model d) {
+		service.uptMember(upt);
+		d.addAttribute("mem", service.getMember(upt.getId()));
+		d.addAttribute("mlist",service.getMemberList(new Member()));
+		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
+	} 
+	@RequestMapping("/memberDel")
+	public String memberUpt(@RequestParam("id") String id) {
+		service.delMember(id);
+		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
+	}	
 }

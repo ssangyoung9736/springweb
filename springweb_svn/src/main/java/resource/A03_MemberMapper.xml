@@ -23,7 +23,7 @@
 		where id = #{id}	
 	</select>
 	<update id="uptMember"  parameterType="member">
-		update member
+		update member200
 			set name=#{name},
 				pass=#{pass},
 				point=#{point},
@@ -31,7 +31,7 @@
 			where id = #{id}
 	</update>		
 	<delete id="delMember" parameterType="string">
-		delete member 
+		delete member200 
 		where id = #{id}
 	</delete>		
 </mapper>		
