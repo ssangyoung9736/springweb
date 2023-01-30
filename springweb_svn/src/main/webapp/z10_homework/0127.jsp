@@ -131,7 +131,43 @@ mapper
 	delete member 
 	where id = #{id}
 		
+# 화면 처리(리스트화면)
+1. 초기화면 호출
+	controller(공통콤보, 초기리스트), model, view
+	A03_MemberController.java
+		@ModelAttribute("authCom")
+		public Member getAuthCom(){
+			return service.getAuthCom()
+		}
+		/memberListMy.do
+		d.addAttribute("mlist",service.getMemberList(sch));
+	A03_MemberService.java
+		.. dao.단   처리 메서드 호출		
 	
+	
+2. 화면 - 데이터 
+	1) form형식 처리
+	2) model데이터 출력 jstl처리
+# 화면 처리(수정 삭제를 위한 단일 화면)
+1. 위리스트 화면에서 클릭시, id값을 통해 요청 화면 로딩
+	controller, model(proc(schOne)), view
+2. 화면 - 데이터 
+	1) 단일 데이터 로딩키, 요청 id값을 기준으로 모달창 로딩 후,
+	2) model데이터 출력 jstl처리
+# 수정 버튼 클릭시
+1.  수정 처리 controller 호출 	
+	controller, model(수정 처리 로딩 표시 proce-upt), view
+2. 화면 - 데이터 
+	1) 수정 처리 후임을 표시
+# 삭제 버튼 클릭시
+1.  수정 처리 controller 호출 	
+	controller, model(수정 처리 로딩 표시 proce-del), view
+2. 화면 -
+	 삭제 alert띄우고, 다시 location.href
+		
+	
+	
+ 		
 	
 	
 	
