@@ -19,6 +19,31 @@
 		- mapper
 			<insert id="insertMember" parameterType="member">
 				insert into member200 values(#{id},#{pass},#{name},#{auth},#{point})
+		- service 호출.		
+	2) view처리
+		- 등록 버튼 추가 - 모달창 로딩 
+		- 모달창 안에 form데이터
+			타이틀 : 회원등록, ps) 상세화면에서 회원상세정보로 처리
+			form데이터에 데이터가 없어야 함
+			버튼 : 등록버튼/닫기  ps) 상세화면에서는 수정/삭제버튼만 있게 처리.
+			모달창안에 등록 버튼 클릭시, 
+				입력여부 및 유효성 처리.. 권한 추가시를 위해 고려?
+				$("#frm02 [name=proc]).val("ins");
+				$("#frm02").attr("action","${path}/insertMember.do")	
+	-------------------------------------			
+	3) controller 처리
+		- @PostMapping("insertMember.do")
+		  public String insertMember(Member ins, Model d){
+		  	service.insertMember(ins);
+		  	d.addAttribute("mem", service.getMember(ins.getId());
+		  	return "";
+		  }
+	4) view단
+		if(proc=="ins"){
+			alert("등록완료");
+		}
+		
+	
 				
 
 
@@ -26,6 +51,22 @@
 [1단계:개념] 4. jsp와 컨테이너에서 bean으로 선언된 view의 우선 순위 설정 방법을 기술하세요
 [1단계:확인] 5. Member객체를 json view로 출력하세요.
 [1단계:확인]*6. select * from emp100으로 데이터 처리(dao,mapper에 추가)하여 json view로 출력하세요.
+	vo Emp
+	dao public List<Emp> getEmpAll();
+	mapper
+		<select id="getEmpAll" resultType="emp">
+			select * from emp100
+		</select>
+	
+	service 호출
+	
+	controller
+		@RequestMapping("/getEmpAll.do")
+		public String getEmpAll(Model d){
+			d.addAttribute("empList",service,getEmpAll()");
+			return "pageJsonReport";
+		}
+	
 
  --%>
 <html>

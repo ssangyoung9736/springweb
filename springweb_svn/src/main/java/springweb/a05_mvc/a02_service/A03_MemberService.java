@@ -30,5 +30,7 @@ public class A03_MemberService {
 	public void delMember(String id) {
 		dao.delMember(id);
 	}
-	
+	public void insertMember(Member ins) {
+		dao.insertMember(ins);
+	}	
 }

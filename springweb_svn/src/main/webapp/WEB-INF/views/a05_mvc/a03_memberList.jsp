@@ -40,11 +40,12 @@
 		// 1. 현재 화면에서 전체조회, 상세화면, 수정, 삭제를 다 처리해야 하기에
 		//		프로세스에 대한 요청값을 기준으로 메시지 처리나 다음 프로세스
 		//      처리 필요성에 의해서 처리된다.
-		// 2. proc의 값 - 리스트처리(""), 수정("upt"), 삭제("del"), 상세화면("schOne")
+		// 2. proc의 값 -팝업 필요X : 리스트처리(""), 삭제("del"), 
+		//				팝업 필요: 등록("ins"),  수정("upt"), 상세화면("schOne")
 		$("#modal01").hide()
 		var proc = "${param.proc}"
 		// 3. 리스트 화면 이외에는 모달창을 로딩이 필요하다.
-		if(proc!=""){
+		if(proc=="ins" || proc=="upt" || proc=="schOne" ){
 			// 요청값으로 단일 검색을 받았을 때, 모달창 로딩
 			$("#modal01").click();
 			// 1. 모달창 로딩 방법
@@ -52,39 +53,25 @@
 			//      2) 모달창 로딩
 		}
 		if(proc=="upt"){
-			if(confirm("수정성공!\n조회화면이동하시겠습니까?")){
-				$("#frm01").submit()
-			}
+			alert("수정완료");
 		}
 		if(proc=="del"){
-			alert("삭제성공!\n조회화면이동!")
-			$("#frm01").submit()
-			
+			alert("삭제성공!")
 		}
-		
+		if(proc=="ins"){
+			alert("등록완료");
+		}		
 		// <p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p># id="uptBtn" ")
 		//  id="uptBtn" 
 		// uptBtn
 		$("#uptBtn").click(function(){
-			var passVal=$("#frm02 [name=pass]").val()
-			var passFrmVal = $("#frm02 #passFrm").val()
-			if(passVal!=passFrmVal){
-				alert("패스워드 패드워드 확인 동일하여야 합니다.")
-				return;
-			}
-			var authVal = $("#frm02 [name=auth]").val()
-			if(authVal==""){
-				alert("권한을 선택하여야 합니다.")
-				return;
-			}
+			checkValid(); 
 			if(confirm("수정하시겠습니까?")){
 				$("#frm02 [name=proc]").val("upt");
 				$("#frm02").attr("action","${path}/memberUpt.do");
 				$("#frm02").submit();
 			}
 		})
-		
-		
 		// /memberUpt.do /memberDel.do
 		$("#delBtn").click(function(){
 			if(confirm("삭제하시겠습니까?")){
@@ -93,11 +80,45 @@
 				$("#frm02").submit();
 			}			
 		})
+		$("#regBtn").hide() // 초기화면에서는 보이지 않게 처리
+		$("#frm02 [name=id]").attr("readonly",true)
+		$("#regLdBtn").click(function(){
+			//타이틀 : 회원등록, ps) 상세화면에서 회원상세정보로 처리
+			$("#modalTitle").text("회원등록")
+			//form데이터에 데이터가 없어야 함
+			$("#frm02 [name=id]").attr("readonly",false)
+			$("#frm02 [name]").val("")
+			//버튼 : 등록버튼/닫기  ps) 상세화면에서는 수정/삭제버튼만 있게 처리.
+			// <button id="regBtn">등록</button>
+			$("#uptBtn, #delBtn").hide()
+			$("#regBtn").show()
+		})
+		$("#regBtn").click(function(){
+			//모달창안에 등록 버튼 클릭시, 
+			//	입력여부 및 유효성 처리.. 권한 추가시를 위해 고려?
+			checkValid(); 
+			$("#frm02 [name=proc]").val("ins");
+			$("#frm02").attr("action","${path}/insertMember.do")				
+			$("#frm02").submit();
+		})
 				
 	});
 	function goPage(id){
 		location.href="${path}/memberMy.do?id="+id+"&proc=schOne"
 	}	
+	function checkValid(){
+		var passVal=$("#frm02 [name=pass]").val()
+		var passFrmVal = $("#frm02 [name=passFrm]").val()
+		if(passVal!=passFrmVal){
+			alert("패스워드 패드워드 확인 동일하여야 합니다.")
+			return;
+		}
+		var authVal = $("#frm02 [name=auth]").val()
+		if(authVal==""){
+			alert("권한을 선택하여야 합니다.")
+			return;
+		}		
+	}
 </script>
 </head>
 
@@ -118,6 +139,8 @@
 	    </select>
 	    <%-- $("[name=auth]").val("${sch.auth}") --%>
 	    
+	    <button id="regLdBtn" class="btn btn-success" type="button"  
+	    	data-toggle="modal" data-target="#exampleModalCenter" >등록</button>
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
@@ -162,7 +185,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">회원상세</h5>
+        <h5 class="modal-title" id="modalTitle">회원상세</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -181,7 +204,7 @@
 			반드시 필요..-->
 	     <div class="row">
 	      <div class="col">
-	        <input name="id" value="${mem.id}" readOnly type="text" class="form-control" placeholder="아이디 입력" >
+	        <input name="id" value="${mem.id}"  type="text" class="form-control" placeholder="아이디 입력" >
 	      </div>
 	      <div class="col">
 	        <input name="name" value="${mem.name}"  type="text" class="form-control" placeholder="이름 입력" >
@@ -192,7 +215,7 @@
 	        <input  name="pass" value="${mem.pass}" type="password" class="form-control" placeholder="패스워드 입력" >
 	      </div>
 	      <div class="col">
-	        <input id="passFrm" value="${mem.pass}"  type="password" class="form-control" placeholder="패스워드 확인">
+	        <input name="passFrm" value="${mem.pass}"  type="password" class="form-control" placeholder="패스워드 확인">
 	      </div>
 	     </div>
 	     <div class="row">
@@ -210,11 +233,15 @@
 	      </div>
 	     </div>	     	     
 	    </form> 
+	    <script>
+	    	
+	    </script>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="regBtn" type="button" class="btn btn-success">등록</button>
         <button id="uptBtn" type="button" class="btn btn-primary">수정</button>
         <button id="delBtn" type="button" class="btn btn-warning">삭제</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

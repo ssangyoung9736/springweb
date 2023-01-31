@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,8 +49,16 @@ public class A03_MemberController {
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	} 
 	@RequestMapping("/memberDel")
-	public String memberUpt(@RequestParam("id") String id) {
+	public String memberUpt(@RequestParam("id") String id, Model d) {
 		service.delMember(id);
+		d.addAttribute("mlist",service.getMemberList(new Member()));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
+	}
+	@PostMapping("insertMember.do")
+	public String insertMember(Member ins, Model d){
+	  	service.insertMember(ins);
+	  	d.addAttribute("mem", service.getMember(ins.getId()));
+	  	d.addAttribute("mlist",service.getMemberList(new Member()));
+	 	return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}	
 }
