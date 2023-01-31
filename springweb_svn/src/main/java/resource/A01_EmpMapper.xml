@@ -38,7 +38,9 @@
 		FROM emp100
 	</select>
 	<select id="getEmpAll" resultType="empinit">
-		select * from emp100
+		select empno, ename, job, nvl(mgr,0) mgr,
+			sal, nvl(comm,0) comm, deptno
+		from emp100
 	</select>
 </mapper>		
 		
