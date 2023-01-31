@@ -38,7 +38,7 @@
 		FROM emp100
 	</select>
 	<select id="getEmpAll" resultType="empinit">
-		select empno, ename, job, nvl(mgr,0) mgr,
+		select empno, ename, job, nvl(mgr,0) mgr, hiredate,
 			sal, nvl(comm,0) comm, deptno
 		from emp100
 	</select>
