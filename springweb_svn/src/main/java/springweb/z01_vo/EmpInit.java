@@ -5,7 +5,6 @@ import java.util.Date;
 public class EmpInit {
 	private int empno;
 	private String ename;
-	private String mename;
 	private String job;
 	private int mgr;
 	private Date hiredate;
@@ -23,12 +22,6 @@ public class EmpInit {
 	}
 	public void setEname(String ename) {
 		this.ename = ename;
-	}
-	public String getMename() {
-		return mename;
-	}
-	public void setMename(String mename) {
-		this.mename = mename;
 	}
 	public String getJob() {
 		return job;
