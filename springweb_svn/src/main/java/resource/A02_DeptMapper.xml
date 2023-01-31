@@ -15,5 +15,9 @@
 		where dname like '%'||#{dname}||'%'
 		and loc like '%'||#{loc}||'%'		
 	</select>
+	<select id="getDept" resultType="dept" parameterType="int">
+		select * from dept100 where deptno=#{deptno}
+	</select>				
+	
 </mapper>		
 		

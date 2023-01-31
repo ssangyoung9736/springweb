@@ -22,4 +22,8 @@ public class A02_DeptService {
 		
 		return dao.getDeptList(sch);
 	}
+	
+	public Dept getDept(int deptno) {
+		return dao.getDept(deptno);
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import springweb.a05_mvc.a02_service.A02_DeptService;
 import springweb.z01_vo.Dept;
@@ -31,4 +32,11 @@ public class A02_DeptController {
 		d.addAttribute("dlist",service.getDeptList(sch));
 		return "pageJsonReport";
 	}
+	
+	@GetMapping("getDept.do")
+	public String getDept(@RequestParam("deptno") int deptno, Model d) {
+		d.addAttribute("dept",service.getDept(deptno));
+		return "pageJsonReport";
+	}
+	
 }
