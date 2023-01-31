@@ -10,11 +10,22 @@
 <%--
 2023-01-30
 [1단계:개념] 1. form화면을 두개 사용하는 이유를 기술하세요
-[2단계:확인] 2. 오늘 처리한 회원관리 화면에서 회원등록 처리를 다이얼로그 박스를 활용해 처리 해보세요.
+[2단계:확인]*2. 오늘 처리한 회원관리 화면에서 회원등록 처리를 다이얼로그 박스를 활용해 처리 해보세요.
+	1) DB 처리 
+		- sql insert into member200 values('goodMan','9999','정수라','normal', 3000);
+		- vo 확인
+		- mybatis 공통 점검 member
+		- dao public void insertMember(Member ins);
+		- mapper
+			<insert id="insertMember" parameterType="member">
+				insert into member200 values(#{id},#{pass},#{name},#{auth},#{point})
+				
+
+
 [1단계:개념] 3. 컨테이너에서 viewResolver를 선언하는 이유를 기술하세요.
 [1단계:개념] 4. jsp와 컨테이너에서 bean으로 선언된 view의 우선 순위 설정 방법을 기술하세요
 [1단계:확인] 5. Member객체를 json view로 출력하세요.
-[1단계:확인] 6. select * from emp으로 데이터 처리(dao,mapper에 추가)하여 json view로 출력하세요.
+[1단계:확인]*6. select * from emp100으로 데이터 처리(dao,mapper에 추가)하여 json view로 출력하세요.
 
  --%>
 <html>

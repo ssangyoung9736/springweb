@@ -10,5 +10,5 @@ public interface A03_MemberDao {
 	public Member getMember(String id);	
 	public void uptMember(Member upt);	
 	public void delMember(String id);
-
+	public void insertMember(Member ins);
 }

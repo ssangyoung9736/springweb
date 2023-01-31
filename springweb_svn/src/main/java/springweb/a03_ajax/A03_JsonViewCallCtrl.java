@@ -18,6 +18,7 @@ public class A03_JsonViewCallCtrl {
 	public String calljson01(Model d) {
 		d.addAttribute("json01", new Dept(10,"인사","서울"));
 		return "pageJsonReport";
+		// 컨테이너에 json 데이터로 모델데이터를 출력하게 해준다.
 	}
 	
 	// ex) callJson02.do  Person객체를 json데이터로 출력하세요

@@ -30,12 +30,26 @@
 	$(document).ready(function(){
 		<%-- m=auth]").val("${sch.auth}")
 		--%>
+		// # 이전에 선택했던 combo(select) 선택
+		// 1. frm01 : 조회된 내용
 		$("#frm01 [name=auth]").val("${sch.auth}")
+		// 2. frm02 : 상세 화면 모달창
 		$("#frm02 [name=auth]").val("${mem.auth}")
+		
+		// # 진행하는 프로세스에 대한 처리에 따라 화면단에서 처리할 내용
+		// 1. 현재 화면에서 전체조회, 상세화면, 수정, 삭제를 다 처리해야 하기에
+		//		프로세스에 대한 요청값을 기준으로 메시지 처리나 다음 프로세스
+		//      처리 필요성에 의해서 처리된다.
+		// 2. proc의 값 - 리스트처리(""), 수정("upt"), 삭제("del"), 상세화면("schOne")
+		$("#modal01").hide()
 		var proc = "${param.proc}"
+		// 3. 리스트 화면 이외에는 모달창을 로딩이 필요하다.
 		if(proc!=""){
 			// 요청값으로 단일 검색을 받았을 때, 모달창 로딩
 			$("#modal01").click();
+			// 1. 모달창 로딩 방법
+			// 		1) 모달창 로딩을 위한 클릭 요소객체(버튼 등)
+			//      2) 모달창 로딩
 		}
 		if(proc=="upt"){
 			if(confirm("수정성공!\n조회화면이동하시겠습니까?")){
@@ -52,20 +66,17 @@
 		//  id="uptBtn" 
 		// uptBtn
 		$("#uptBtn").click(function(){
-			console.log("#1")
 			var passVal=$("#frm02 [name=pass]").val()
 			var passFrmVal = $("#frm02 #passFrm").val()
 			if(passVal!=passFrmVal){
 				alert("패스워드 패드워드 확인 동일하여야 합니다.")
 				return;
 			}
-			console.log("#2")
 			var authVal = $("#frm02 [name=auth]").val()
 			if(authVal==""){
 				alert("권한을 선택하여야 합니다.")
 				return;
 			}
-			console.log("#3")
 			if(confirm("수정하시겠습니까?")){
 				$("#frm02 [name=proc]").val("upt");
 				$("#frm02").attr("action","${path}/memberUpt.do");
@@ -142,7 +153,11 @@
 	 
     
 </div>
-<p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" ></p>
+<!-- 모달 창로딩을 위한 요소 객체 속성 설정 -->
+<p id="modal01" data-toggle="modal" data-target="#exampleModalCenter" >클릭!!</p>
+<!-- 현재는 요청 프로세스에 의해 이벤트 강제 수행에 의해 모달창이 로딩되게 처리하였다.
+	$("#modal01").click();
+위 요소객체 클릭시 로딩할 모달창 -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -162,9 +177,11 @@
       <div class="modal-body">
 		<form id="frm02" class="form"  method="post">
 			<input type="hidden" name="proc"/>
+			<!--이 요청값으로 다음 프로세스에 대한 처리를 위해 설정, 굳이 보일 필요는 없지만
+			반드시 필요..-->
 	     <div class="row">
 	      <div class="col">
-	        <input name="id" value="${mem.id}" type="text" class="form-control" placeholder="아이디 입력" >
+	        <input name="id" value="${mem.id}" readOnly type="text" class="form-control" placeholder="아이디 입력" >
 	      </div>
 	      <div class="col">
 	        <input name="name" value="${mem.name}"  type="text" class="form-control" placeholder="이름 입력" >
@@ -175,7 +192,7 @@
 	        <input  name="pass" value="${mem.pass}" type="password" class="form-control" placeholder="패스워드 입력" >
 	      </div>
 	      <div class="col">
-	        <input id="passFrm" value=""  type="password" class="form-control" placeholder="패스워드 확인">
+	        <input id="passFrm" value="${mem.pass}"  type="password" class="form-control" placeholder="패스워드 확인">
 	      </div>
 	     </div>
 	     <div class="row">

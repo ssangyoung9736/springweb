@@ -33,6 +33,10 @@
 	<delete id="delMember" parameterType="string">
 		delete member200 
 		where id = #{id}
-	</delete>		
+	</delete>
+	<insert id="insertMember" parameterType="member">
+		insert into member200 values(#{id},#{pass},#{name},#{auth},#{point})
+	</insert>
+			
 </mapper>		
 		

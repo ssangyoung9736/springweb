@@ -32,7 +32,9 @@ public class A03_MemberController {
 	@GetMapping("/memberMy.do")
 	public String getMember(@RequestParam("id") String id, 
 							Model d) {
+		// 모달창에 데이터를 로딩
 		d.addAttribute("mem", service.getMember(id));
+		// 모달창 뒤에 전체조회된 내용 리스트를 위해 처리.
 		d.addAttribute("mlist",service.getMemberList(new Member()));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}
@@ -40,6 +42,7 @@ public class A03_MemberController {
 	@RequestMapping("/memberUpt")
 	public String memberUpt(Member upt, Model d) {
 		service.uptMember(upt);
+		// 수정된 이후에 데이터를 로딩 처리
 		d.addAttribute("mem", service.getMember(upt.getId()));
 		d.addAttribute("mlist",service.getMemberList(new Member()));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
