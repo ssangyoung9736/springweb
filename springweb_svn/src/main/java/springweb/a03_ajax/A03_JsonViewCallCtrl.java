@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import springweb.a05_mvc.a02_service.A01_EmpService;
 import springweb.a05_mvc.a02_service.A02_DeptService;
 import springweb.z01_vo.Dept;
-import springweb.z01_vo.Emp;
 import springweb.z01_vo.Person;
 
 @Controller
@@ -45,9 +45,11 @@ public class A03_JsonViewCallCtrl {
 		d.addAttribute("mgrList", service2.getMgrComb());
 		return "pageJsonReport";
 	}
-	
-	// 16:05~
-	// getMgrComb
+	@RequestMapping("/getEmpAll.do")
+	public String getEmpAll(Model d){
+		d.addAttribute("empList",service2.getEmpAll());
+		return "pageJsonReport";
+	}
 	
 	
 	

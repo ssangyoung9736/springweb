@@ -9,6 +9,7 @@ import springweb.a05_mvc.a03_dao.A01_EmpDao;
 import springweb.z01_vo.Code;
 import springweb.z01_vo.Dept;
 import springweb.z01_vo.Emp;
+import springweb.z01_vo.EmpInit;
 
 @Service
 public class A01_EmpService {
@@ -30,5 +31,7 @@ public class A01_EmpService {
 	public List<String> getJobComb(){
 		return dao.getJobComb();
 	}		
-	
+	public List<EmpInit> getEmpAll(){
+		return dao.getEmpAll();
+	}
 }

@@ -57,9 +57,7 @@
 		<select id="getEmpAll" resultType="emp">
 			select * from emp100
 		</select>
-	
 	service 호출
-	
 	controller
 		@RequestMapping("/getEmpAll.do")
 		public String getEmpAll(Model d){

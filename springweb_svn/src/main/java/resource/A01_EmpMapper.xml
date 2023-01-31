@@ -36,6 +36,9 @@
 	<select id="getJobComb" resultType="string">
 		SELECT DISTINCT job
 		FROM emp100
-	</select>	
+	</select>
+	<select id="getEmpAll" resultType="empinit">
+		select * from emp100
+	</select>
 </mapper>		
 		
