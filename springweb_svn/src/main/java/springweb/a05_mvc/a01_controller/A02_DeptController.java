@@ -41,13 +41,15 @@ public class A02_DeptController {
 	}
 
 	@GetMapping("updateDept.do")
-	public String updateDept(Dept sch,  Model d) {
-		d.addAttribute("dept",service.getDept(sch.getDeptno()));
-		d.addAttribute("dlist",service.getDeptList(sch));
+	public String updateDept(Dept upt,  Model d) {
+		service.updateDept(upt);
+		d.addAttribute("dept",service.getDept(upt.getDeptno()));
+		d.addAttribute("dlist",service.getDeptList(upt));
 		return "pageJsonReport";
 	}
 	@GetMapping("deleteDept.do")
 	public String deleteDept(@RequestParam("deptno") int deptno, Model d) {
+		service.deleteDept(deptno);
 		d.addAttribute("dlist",service.getDeptList(new Dept()));
 		return "pageJsonReport";
 	}
