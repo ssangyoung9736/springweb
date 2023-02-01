@@ -18,6 +18,16 @@
 	<select id="getDept" resultType="dept" parameterType="int">
 		select * from dept100 where deptno=#{deptno}
 	</select>				
-	
+	<update id="updateDept" parameterType="dept">
+		update dept100
+			set dname=#{dname},
+				loc=#{loc}
+			where deptno=#{deptno}
+	</update>	
+	<delete id="deleteDept" parameterType="int">
+		delete
+		from dept100
+		where deptno=#{deptno}
+	</delete>		
 </mapper>		
 		

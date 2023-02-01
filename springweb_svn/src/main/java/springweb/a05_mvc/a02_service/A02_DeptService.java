@@ -26,4 +26,11 @@ public class A02_DeptService {
 	public Dept getDept(int deptno) {
 		return dao.getDept(deptno);
 	}
+	public void updateDept(Dept upt) {
+		dao.updateDept(upt);
+	}
+	public void deleteDept(int deptno) {
+		dao.deleteDept(deptno);
+	}	
+	
 }

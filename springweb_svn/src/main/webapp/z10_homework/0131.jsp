@@ -110,6 +110,42 @@
 
 
 [1단계:확인]*4. 부서 상세화면에서 ajax로 부서정보를 수정/삭제 처리하세요.
+	1) DB처리
+		sql 	
+			update dept100
+				set dname=#{dname},
+					loc=#{loc}
+			where deptno=#{deptno}
+			
+			delete
+			from dept100
+			where deptno=#{deptno}
+		vo	Dept
+		공통	dept
+		dao	
+			public void updateDept(Dept upt);
+			public void deleteDept(int deptno);
+		mapper
+			<update id="updateDept" parameterType="dept">
+				update dept100
+					set dname=#{dname},
+						loc=#{loc}
+				where deptno=#{deptno}
+			</update>	
+			<delete id="deleteDept" parameterType="int">
+				delete
+				from dept100
+				where deptno=#{deptno}
+			</delete>											
+		service			
+		controller
+			/updateDept.do	
+			/deleteDept.do	
+		정리 및 구현
+	
+	2) 화면구현
+
+
 [1단계:개념] 5. vue의 개발환경을 위한 설정 방법을 기술하세요.
 [1단계:확인]*6. vue의 MVVM패턴을 이용하여 모델로 선언한 name, age, loc를 통해서 화면에 이름 나이 사는 곳에 출력되게하세요.
 		
