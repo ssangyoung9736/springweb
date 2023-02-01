@@ -41,7 +41,37 @@
 				6) service
 				========
 				7) controller
-[1단계:확인]*3. salgrade 테이블을 ajax로 로딩된 데이터를 출력하고, 행별 등급을 클릭시, 등급상세화면이 ajax로 로딩되게 처리하세요.
+[1단계:확인]*3. salgrade 테이블을 ajax로 로딩된 데이터를 출력하고, 
+	행별 등급을 클릭시, 등급상세화면이 ajax로 로딩되게 처리하세요.
+	sql
+		select * from salgrade	
+		select * from salgrade where grade = #{grade}
+	vo Salgrade
+	공통my salgrade, SalMapper.xml
+	dao	
+		public List<Salgrade> getSalList();
+		public Salgrade getSalgrade(int grade);
+	mapper
+		<select id="getSalList" resultType="salgrade">
+			select * from salgrade
+		<select id="getSalgrade" parameterType="int"
+				resultType="salgrade">
+			select * from salgrade where grade = #{grade}
+	service
+	controller
+		/salgradeInit.do
+		/salgradeList.do
+		/salgrade.do 			
+	view  a05_salgradeList.jsp 			
+		
+		
+		
+			
+			
+	
+	
+
+
 [1단계:확인]*4. 부서 상세화면에서 ajax로 부서정보를 수정/삭제 처리하세요.
 [1단계:개념] 5. vue의 개발환경을 위한 설정 방법을 기술하세요.
 [1단계:확인]*6. vue의 MVVM패턴을 이용하여 모델로 선언한 name, age, loc를 통해서 화면에 이름 나이 사는 곳에 출력되게하세요.
