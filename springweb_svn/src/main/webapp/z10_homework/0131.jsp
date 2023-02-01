@@ -144,6 +144,42 @@
 		정리 및 구현
 	
 	2) 화면구현
+		 다이얼로그 화면에
+		 	수정
+		 	삭제버튼 추가
+		 $("#uptBtn").click(function(){
+		 	//  유효성 check..
+		 	$.ajax({
+		 		url:"${path}/updateDept.do",
+		 		type:"get",
+		 		data:$("#frm02").serialize()
+		 		dataType:"json",
+		 		success:function(data){
+		 			var dept = data.dept
+		 			if(dept!=null){
+		 				alert("수정완료");
+		 			}
+		 			// 리스트 데이터 update
+		 			var dlist = data.dlist
+		 		}
+		 	})
+		 })	
+		 $("#delBtn").click(function(){
+		 	$.ajax({
+		 		url:"${path}/deleteDept.do",
+		 		type:"get",
+		 		data:$("#frm02").serialize()
+		 		dataType:"json",
+		 		success:function(data){
+	 				alert("삭제완료");
+		 			// 리스트 데이터 update
+		 			var dlist = data.dlist
+		 		}
+		 	})
+		 })			
+	
+	
+	
 
 
 [1단계:개념] 5. vue의 개발환경을 위한 설정 방법을 기술하세요.
