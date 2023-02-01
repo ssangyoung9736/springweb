@@ -114,13 +114,24 @@
 [1단계:확인]*6. vue의 MVVM패턴을 이용하여 모델로 선언한 name, age, loc를 통해서 화면에 이름 나이 사는 곳에 출력되게하세요.
 		
 		--%>	
+		// 2. 모델
+		var model = {name:"홍길동", age:25, loc:"서울"}
+		// 3. 뷰모델
+		var vm = new Vue({
+			el:"#show",  //view범위 선언,
+			data:model  //모델데이터 선언
+		})
+		
 	});
 </script>
 </head>
 
 <body>
-<div class="jumbotron text-center">
-  <h2>로그인</h2>
+<!--1. view -->
+<div id="show" class="jumbotron text-center">
+  <h2>이름:{{name}}</h2>
+  <h2>나이:{{age}}</h2>
+  <h2>사는곳:{{loc}}</h2>
   <%--
   <h2 data-toggle="modal" data-target="#exampleModalCenter">
    --%>

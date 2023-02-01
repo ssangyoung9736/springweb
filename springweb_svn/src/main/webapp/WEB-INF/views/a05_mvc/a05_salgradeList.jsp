@@ -29,8 +29,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		search()
-	
-		
 	});
 	function search(){
 		$.ajax({
@@ -42,7 +40,7 @@
 				console.log(slist)
 				var show=""
 				$(slist).each(function(idx, sal){
-					show+="<tr onclick='goPage("+sal.grade+")'>"
+					show+="<tr ondblclick='goPage("+sal.grade+")'>"
 					show+="<td>"+sal.grade+"</td>"
 					show+="<td>"+sal.hisal+"</td>"
 					show+="<td>"+sal.losal+"</td>"
