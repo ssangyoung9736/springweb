@@ -28,51 +28,74 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		<%-- 
+		search()
+	
 		
-		--%>	
 	});
+	function search(){
+		$.ajax({
+			url:"${path}/salgradeList.do",
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				var slist = data.slist
+				console.log(slist)
+				var show=""
+				$(slist).each(function(idx, sal){
+					show+="<tr onclick='goPage("+sal.grade+")'>"
+					show+="<td>"+sal.grade+"</td>"
+					show+="<td>"+sal.hisal+"</td>"
+					show+="<td>"+sal.losal+"</td>"
+					show+="</tr>"
+				})
+				$("table tbody").html(show)
+			}
+		})
+	} 
+	function goPage(grade){
+		$("#modal01").click()
+		$.ajax({
+			url:"${path}/salgrade.do",
+			type:"get",
+			data:"grade="+grade,
+			dataType:"json",
+			success:function(data){
+				var sal = data.sal
+				console.log(sal)
+				$("#frm02 [name=grade]").val(sal.grade);
+				$("#frm02 [name=hisal]").val(sal.hisal);
+				$("#frm02 [name=losal]").val(sal.losal);
+			}
+		})		
+	}		
 </script>
 </head>
 
 <body>
 <div class="jumbotron text-center">
-  <h2 >급여등급</h2>
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">타이틀</h2>
+  <h2 >급여등급리스트</h2>
+  
 
 </div>
 <div class="container">
-	<form id="frm01" class="form-inline"  method="post">
-  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="제목" />
-	    <input class="form-control mr-sm-2" placeholder="내용" />
-	    <button class="btn btn-info" type="submit">Search</button>
- 	</nav>
-	</form>
    <table class="table table-hover table-striped">
-   	<col width="10%">
-   	<col width="50%">
-   	<col width="15%">
-   	<col width="15%">
-   	<col width="10%">
+   	<col width="33%">
+   	<col width="33%">
+   	<col width="33%">
     <thead>
     
       <tr class="table-success text-center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회</th>
+        <th>등급</th>
+        <th>시작</th>
+        <th>마지막</th>
       </tr>
     </thead>	
     <tbody>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
     </tbody>
 	</table>    
     
 </div>
+<h2 id="modal01" data-toggle="modal" data-target="#exampleModalCenter"></h2>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -86,12 +109,21 @@
 		<form id="frm02" class="form"  method="post">
 	     <div class="row">
 	      <div class="col">
-	        <input type="text" class="form-control" placeholder="사원명 입력" name="ename">
-	      </div>
-	      <div class="col">
-	        <input type="text" class="form-control" placeholder="직책명 입력" name="job">
+	        <input type="text" class="form-control" placeholder="등급 입력" name="grade">
 	      </div>
 	     </div>
+	     <div class="row">
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="시작 입력" name="losal">
+	      </div>
+	     </div>
+	     <div class="row">
+	      <div class="col">
+	        <input type="text" class="form-control" placeholder="끝 입력" name="hisal">
+	      </div>
+	     </div>
+
+
 	    </form> 
       </div>
       <div class="modal-footer">

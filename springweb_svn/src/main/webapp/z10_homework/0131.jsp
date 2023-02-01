@@ -62,7 +62,44 @@
 		/salgradeInit.do
 		/salgradeList.do
 		/salgrade.do 			
-	view  a05_salgradeList.jsp 			
+	view  a05_salgradeList.jsp 
+	
+	search()
+	function search(){
+		$.ajax({
+			url:"{path}/salgradeList.do",
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				var slist = data.slist
+				var show=""
+				$(slist).each(function(idx, sal){
+					show+="<tr onclick='goPage("+sal.grade+")'>"
+					show+="<td>"+sal.grade+"</td>"
+					show+="<td>"+sal.hisal+"</td>"
+					show+="<td>"+sal.losal+"</td>"
+					show+="</tr>
+				})
+				$("table tbody").html(show)
+			}
+		})
+	} 
+	function goPage(grade){
+		$("#modal01").click()
+		$.ajax({
+			url:"{path}/salgrade.do",
+			type:"get",
+			data:"grade="+grade,
+			dataType:"json",
+			success:function(data){
+				var sal = data.sal
+				$("#frm02 [name=sal]").val(sal.grade);
+				$("#frm02 [name=hisal]").val(sal.hisal);
+				$("#frm02 [name=losal]").val(sal.losal);
+			}
+		})		
+	}
+				
 		
 		
 		
