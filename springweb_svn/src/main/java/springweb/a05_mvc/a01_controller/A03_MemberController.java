@@ -39,6 +39,19 @@ public class A03_MemberController {
 		d.addAttribute("mlist",service.getMemberList(new Member()));
 		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}
+	// /memberMyAjax.do?id=himan
+	@GetMapping("/memberMyAjax.do")
+	public String memberMyAjax(@RequestParam("id") String id, Model d) {
+		d.addAttribute("mem", service.getMember(id));
+		
+		return "pageJsonReport";
+	}
+	
+	
+	
+	
+	
+	
 	// /memberUpt.do /memberDel.do
 	@RequestMapping("/memberUpt")
 	public String memberUpt(Member upt, Model d) {
@@ -56,8 +69,10 @@ public class A03_MemberController {
 	}
 	@PostMapping("insertMember.do")
 	public String insertMember(Member ins, Model d){
-	  	service.insertMember(ins);
-	  	d.addAttribute("mem", service.getMember(ins.getId()));
+		// 항상 프로그래밍을 조건문/반복문을 처리하기 전에
+		// 코드 순서를 먼저 잘 위치시켜야 한다. 
+		service.insertMember(ins);
+		d.addAttribute("mem", service.getMember(ins.getId()));
 	  	d.addAttribute("mlist",service.getMemberList(new Member()));
 	 	return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
 	}	

@@ -27,6 +27,7 @@ public class A02_DeptController {
 	public String deptAjaxInit() {
 		return "WEB-INF\\views\\a05_mvc\\a04_ajaxList.jsp";
 	}
+	// Get/Post ==> RequestMapping(둘다 가능)
 	@PostMapping("deptAjax.do")
 	public String deptAjaxInitData(Dept sch, Model d) {
 		d.addAttribute("dlist",service.getDeptList(sch));
