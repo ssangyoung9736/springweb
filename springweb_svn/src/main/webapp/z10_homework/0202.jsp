@@ -13,8 +13,12 @@
 [1단계:확인] 2. 양방향 디렉티브를 활용하여 타석과 안타를 입력하여 타율이 출력되게 하세요
 [2단계:확인] 3. 양방향 디렉티브를 활용하여 임의의 구구단 문제의 정답을 입력했을 때, 정답인지 여부를 출력되게 하세요
                5 X 7 = [정답입력]  정답/오답
-[1단계:확인] 4. v-if 조건문을 활용하여 입력한 아이디와 패스워드가 맞으면 로그인성공/로그인실패/아이디와패스워드를 입력하세요로
+[1단계:확인]*4. v-if 조건문을 활용하여 입력한 아이디와 패스워드가 맞으면 로그인성공/로그인실패/아이디와패스워드를 입력하세요로
                구분하여 출력하세요.
+    1) 모델 데이터 선언 
+    2) UI 화면구성
+    3) 디렉티브 선언(양방향/단방향 선언)
+    4) 조건문 디렉티브          
 [1단계:개념] 5. v-if와 v-show의 차이점을 기술하세요.
 [1단계:확인] 6. v-for의 객체단위 사용을 이용하여 모델명으로 컴퓨터(com01), 모델객체로 제조사, 가격, CPU사양으로 속성으로 설정하여
                테이블에 속성 : 속성값 형식으로 출력하세요.
@@ -41,24 +45,44 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		<%-- 
-		
+    1) 모델 데이터 선언 
+    2) UI 화면구성
+    3) 디렉티브 선언(양방향/단방향 선언)
+    4) 조건문 디렉티브    		
 		--%>	
+		var vm = new Vue({
+			el:".container",
+			data:{id:"",pass:""}
+		})
+		console.log(vm)
 	});
 </script>
 </head>
 
 <body>
-<div class="jumbotron text-center">
-  <h2>로그인</h2>
-  <%--
-  <h2 data-toggle="modal" data-target="#exampleModalCenter">
-   --%>
-</div>
-<div class="container">
+<!-- 
+로그인성공/로그인실패/아이디와패스워드를 입력하세요
+ -->
+
+
+<!-- 
+		var vm = new Vue({
+			el:".container",
+			data:{id:"",pass:""}
+		})
+ -->
+ <div class="container">
+	<div class="jumbotron text-center">
+	  <h2>로그인</h2>
+	  <h3 v-if="id=='himan' && pass=='7777'">로그인성공</h3>
+	  <h3 v-else-if="id=='' || pass==''">아이디와 패스워드를 입력하세요</h3>
+	  <h3 v-else>로그인 실패</h3>
+	</div>
+
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="제목" />
-	    <input class="form-control mr-sm-2" placeholder="내용" />
+	    <input v-model="id" class="form-control mr-sm-2" placeholder="아이디입력" />
+	    <input v-model="pass" class="form-control mr-sm-2" placeholder="패스워드입력" />
 	    <button class="btn btn-info" type="submit">Search</button>
  	</nav>
 	</form>
