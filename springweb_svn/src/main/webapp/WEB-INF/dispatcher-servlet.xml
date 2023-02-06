@@ -41,6 +41,8 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
 	</context:component-scan>
+	<context:property-placeholder location="classpath:resource/a00_config"/>
+	
 	<!-- 
 	# DB연결처리
 	1. dbcp(database connection pool) 로 연결
@@ -91,4 +93,6 @@
 		<property name="contentType" 
 			value="text/html;charset=utf-8"/>	
 	</bean>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	
 </beans>      
