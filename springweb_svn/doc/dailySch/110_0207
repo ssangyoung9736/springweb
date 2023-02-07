@@ -13,8 +13,8 @@
 
 
 # 주요핵심 개념 및 keyword
-1.  
-2. 
+1. report.transferTo(tmpFile) 
+2. v-on:이벤트명="기능메서드" 
 
 
 # 주간일정계획
