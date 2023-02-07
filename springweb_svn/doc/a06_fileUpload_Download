@@ -93,18 +93,18 @@
 ---------------------------------------------
 # 파일업로드 및 업로드된 리스트 정보 확인..
 1. 초기화면 호출
+ 	VO객체 파일 업로드 가능하게 report속성으로 MultiPartFile로 추가
 	A05_FileUploadController.java
-	
-	/fileList.do (get/post방식) - 업로드 및 리스트 확인
-	
+	/fileList.do (get/post방식) - 리스트
+	/fileUpLoad.do (get/post방식) - 업로드	
 	WEB-INF\views\a05_mvc\a13_fileUpLoadList.jsp
 		- 조회할 form
-			schTitle
+			title
 	
 		- 등록할 form
 			title, etc, report(파일객체)  form으로 추가하여 처리할 수 있게 화면 구성
 2. 서비스단 처리(springweb\a05_mvc\a02_service\A05_FileService.java)
-    0) VO객체 파일 업로드 가능하게 report속성으로 MultiPartFile로 추가
+    
 	1) 업로드 메서드
 		public void insertFile(FileRep ins);
 		파일을 업로드 하는 기능메서드 구현
@@ -114,9 +114,8 @@
 			#{path},,#{fname}			
 		dao단에 insertFile
 	2) 리스트 메스트메서드
-		public List<FileRep> getFileList(String schTile, FileRep ins){
+		public List<FileRep> getFileList(String schTile){
 			// 정의된 등록 메서드 처리
-			insertFile(ins)
 			return dao.getFileList(schTile); # 검색하는 title로 처리
 		}
 		

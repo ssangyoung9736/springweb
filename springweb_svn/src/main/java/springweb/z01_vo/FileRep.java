@@ -1,6 +1,8 @@
 package springweb.z01_vo;
 
 import java.util.Date;
+
+import org.springframework.web.multipart.MultipartFile;
 // springweb.z01_vo.FileRep
 public class FileRep {
 	private int no;
@@ -11,6 +13,8 @@ public class FileRep {
 	private String etc;
 	private Date regdte;
 	private Date uptdte;
+	private MultipartFile report;
+	
 	public int getNo() {
 		return no;
 	}
@@ -58,6 +62,12 @@ public class FileRep {
 	}
 	public void setUptdte(Date uptdte) {
 		this.uptdte = uptdte;
+	}
+	public MultipartFile getReport() {
+		return report;
+	}
+	public void setReport(MultipartFile report) {
+		this.report = report;
 	}
 	
 	
