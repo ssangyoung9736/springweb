@@ -50,6 +50,8 @@ public class A05_FileUploadController {
 		}		
 		return "WEB-INF\\views\\a05_mvc\\a12_fileUpload.jsp";
 	}	
+	
+
 	@RequestMapping("/fileList.do")
 	public String fileList(@RequestParam(value = "title", defaultValue = "") String title,
 				Model d) {

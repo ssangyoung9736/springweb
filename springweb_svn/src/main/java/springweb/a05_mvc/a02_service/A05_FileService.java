@@ -18,6 +18,7 @@ public class A05_FileService {
 	
 	@Value("${file.upload}")
 	private String upload;
+
 	
 	public String uploadFile(MultipartFile report) {
 		String fname = report.getOriginalFilename();
@@ -37,6 +38,8 @@ public class A05_FileService {
 		}
 		return fname;
 	}
+
+	
 	@Autowired(required=false)
 	A05_FileDao dao;
 	public String insertFile(FileRep f) {

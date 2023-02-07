@@ -36,6 +36,11 @@
 			alert(msg)
 		}		
 	});
+	function download(fname){
+		if(confirm(fname+"다운로드 하시겠습니까?")){
+			location.href="${path}/download.do?fname="+fname;
+		}
+	}	
 </script>
 </head>
 
@@ -69,11 +74,10 @@
     <tbody>
     	
     	<c:forEach var="fObj" items="${flist}">
-    		<tr><td>${fObj.no}</td><td>${fObj.title}</td>
+    		<tr ondblclick="download('${fObj.fname}')"><td>${fObj.no}</td><td>${fObj.title}</td>
     			<td>${fObj.fname}</td>
     			<td><fmt:formatDate value="${fObj.regdte}"/></td></tr>
     	</c:forEach>
-    	
     </tbody>
 	</table>    
     
@@ -95,7 +99,7 @@
 	      <div class="col">
 	        <input type="text" class="form-control" placeholder="파일내용" name="title">
 	      </div>
-
+ 
 	     </div>
 	     <div class="row">
 	      <div class="col">
