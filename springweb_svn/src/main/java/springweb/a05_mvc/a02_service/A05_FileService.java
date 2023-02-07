@@ -39,7 +39,7 @@ public class A05_FileService {
 	}
 	@Autowired(required=false)
 	A05_FileDao dao;
-	public void insertFile(FileRep f) {
+	public String insertFile(FileRep f) {
 		// #{path},,#{fname}	
 		// 물리적 파일 업로드 처리
 		String fname = uploadFile(f.getReport());
@@ -47,6 +47,7 @@ public class A05_FileService {
 		f.setFname( fname );
 		f.setPath( upload );
 		dao.insertFile(f);
+		return fname;
 	}
 	public List<FileRep> getFileList(String title){
 		return dao.getFileList(title);

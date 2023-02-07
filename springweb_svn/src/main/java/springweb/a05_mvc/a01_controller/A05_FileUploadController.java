@@ -58,9 +58,12 @@ public class A05_FileUploadController {
 	}
 	@PostMapping("/fileUpLoad.do")
 	public String fileUpLoad(FileRep upload,Model d) {
-		//
 		
-		return "redirect:/fileList.do"; // 업로드 후에 바로 전체 리스트 검색되게 처리
+		if(service.insertFile(upload)!="") {
+			d.addAttribute("msg", "업로드 성공");
+		}
+		d.addAttribute("flist", service.getFileList(""));
+		return "WEB-INF\\views\\a05_mvc\\a13_fileUpLoadList.jsp";
 	}
 	
 }
