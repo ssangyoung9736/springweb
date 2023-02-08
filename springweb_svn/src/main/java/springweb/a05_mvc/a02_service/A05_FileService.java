@@ -21,8 +21,12 @@ public class A05_FileService {
 
 	
 	public String uploadFile(MultipartFile report) {
+		// File fObj = new File(upload+fname);	
+		// report.transferTo(fObj)
 		String fname = report.getOriginalFilename();
-		if(fname!=null && !fname.equals("")) {
+		System.out.print("파일명:"+fname);
+		System.out.print("파일명:"+fname.length());
+		if( !fname.equals("")) {
 			File fObj = new File(upload+fname);	
 			
 			try {
@@ -46,6 +50,7 @@ public class A05_FileService {
 		// #{path},,#{fname}	
 		// 물리적 파일 업로드 처리
 		String fname = uploadFile(f.getReport());
+		
 		// DB 입력
 		f.setFname( fname );
 		f.setPath( upload );

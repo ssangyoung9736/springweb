@@ -39,7 +39,8 @@ public class Z01_DownloadView extends AbstractView{
 		//  3) 헤더정보에 파일명을 입력하는데, 한글일 경우 encoding을 처리해야 한다.
 		fname = URLEncoder.encode(fname,"utf-8").replaceAll("\\+"," ");
 		// attachment;filename="파일명"
-		response.setHeader("Content-Disposition", "attachment;filename=\""+fname+"\"");
+		response.setHeader("Content-Disposition", 
+							"attachment;filename=\""+fname+"\"");
 		//  4)헤더정보를 통해서 binary데이터 전송
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		// 3. FileInputStream으로 파일 객체 탑제, response객체의 OutputStream으로 
@@ -50,9 +51,6 @@ public class Z01_DownloadView extends AbstractView{
 		FileCopyUtils.copy(fis, out);
 		// 4. response객체의 stream 자원 해제..
 		out.flush();
-		
-		
-		
 	}
 
 

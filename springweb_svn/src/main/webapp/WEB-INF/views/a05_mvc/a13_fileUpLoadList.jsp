@@ -49,7 +49,7 @@
   <h2>등록 파일 리스트</h2>
 </div>
 <div class="container">
-	<form id="frm01" class="form"  method="post">
+	<form id="frm01" action="${path}/fileList.do" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    <input name="title" class="form-control mr-sm-2" placeholder="검색할 내용" />
 	    <button class="btn btn-success" type="button"
