@@ -102,10 +102,6 @@ public class Emp {
 	}
 
 
-	public long getHiredateTime() {
-		return getHiredate().getTime();
-	}
-
 	public void setHiredate(Date hiredate) {
 		this.hiredate = hiredate;
 	}
