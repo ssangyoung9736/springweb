@@ -29,8 +29,7 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd   
        http://www.springframework.org/schema/tx
-       http://www.springframework.org/schema/tx/spring-tx.xsd   
-      ">
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<bean id="obj" class="java.lang.Object" />
 	<!-- 
 	//a01_diexp.z01_vo.HandPhone
