@@ -15,9 +15,9 @@
 	<div>
 		<h2>{{name}}의 성적, 평균 : {{avg}}</h2>
 	  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		    <input v-model="kor" class="form-control mr-sm-2" placeholder="국어" />
-		    <input v-model="eng" class="form-control mr-sm-2" placeholder="영어" />
-		    <input v-model="math" class="form-control mr-sm-2" placeholder="수학" />
+		    <input v-model="kor" class="form-control mr-sm-2" placeholder="국어입력" />
+		    <input v-model="eng" class="form-control mr-sm-2" placeholder="영어입력" />
+		    <input v-model="math" class="form-control mr-sm-2" placeholder="수학입력" />
 		    <button class="btn btn-info" @click="calcu" type="button">평균</button>
 	 	</nav>
 	</div>
@@ -26,7 +26,7 @@
 Vue.component("stu-comp",{
 	template:"#stTmp",
 	data:function(){
-		return {kor:0,eng:0,math:0,avg:0}
+		return {kor:'',eng:'',math:'',avg:''}
 	},
 	props:['name'],
 	methods:{
@@ -34,28 +34,26 @@ Vue.component("stu-comp",{
 			var tot = parseInt(this.kor)+parseInt(this.eng)+parseInt(this.math)
 			this.avg = Math.floor(tot/3)
 			this.$emit("calcuavg", this.avg)
-			// <stu-comp name="홍길동" @calcuavg="totavg"><stu-comp>
+			//<stu-comp  @calcuavg="totavg"  :name="sname"  v-for="sname in stnames" ><stu-comp>
 		}
 	}
 })
 	$(document).ready(function(){
 		var vm = new Vue({
 			el:".container",
-			data:{msg:"학생 성적 (컴포넌트)", tot:0, allavg:0, stnames:['홍길동','김길동','신길동']},
+			data:{msg:"학생 성적 (컴포넌트)", tot:0, allavg:0, 
+					stnames:['홍길동','김길동','신길동']},
 			methods:{
 				totavg:function(avg){
-					console.log(avg)
 					var stucount = this.stnames.length
-					console.log(stucount)
 					this.tot +=avg;
 					this.allavg = Math.floor(this.tot/stucount)
-					console.log()
 				}
 			}
 		});	
 		/*
 		<h2>전체 평균:{{allavg}}</h2>
-		<stu-comp :name="sname"  v-for="sname in stnames"><td>{{sname}}</stu-comp>
+		<stu-comp :name="sname"  v-for="sname in stnames"  @calcuavg="totavg"><stu-comp>
 		*/
 	});
 	

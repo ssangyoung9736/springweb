@@ -126,9 +126,26 @@ Vue.component("com01",{
 		<상위컴포넌트 @상위에서선언이벤트명="상위선언이벤트핸들러"
  
 		methods:상위선언이벤트핸들러(하위에서전달한데이터받는 변수1, 변수2.){
-			
-			
 		}
+	2) 하위에서 상위로 전달 event
+		- 하위 템플릿
+			<button @click="calcu">과일가격:{{price}}</button>
+		- 컴포넌트 메서드 선언
+			Vue.component("comp",{		
+				props:['price'],
+				methods:{
+					calcu:function(){
+						console.log("가격:"+this.price)  props속성도 this.속성명으로 접근가능
+						this.$emit("totcal",this.price, this.cnt) 이벤트에 해당 값을 전달.
+					}
+				}			
+		- 상위 템플릿/화면 구성
+			<com price="1000" @totcal="allprice"   @이벤트명="이벤트핸들러함수"
+		- 상위 요소객체 선언
+			data:{msg:"시작!!(뷰와함께)", sum:0},
+			methods:{
+				allprice:function(price, cnt){
+					this.sum+=parseInt(price)	# 누적해서 합산 처리..	
  */
 
 

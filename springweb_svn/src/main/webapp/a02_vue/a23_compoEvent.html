@@ -14,7 +14,7 @@
 <template id="tmp01">
 	<div>
 		<button @click="calcu">{{name}} 가격:{{price}}</button>
-		<button @click="calcu2(price)">{{name}} 가격:{{price}}</button>
+		<button @click="calcu2(name, price)">{{name}} 가격:{{price}}</button>
 	</div>
 </template>
 <script type="text/javascript">
@@ -24,11 +24,18 @@
 		methods:{
 			calcu:function(){
 				console.log("가격:"+this.price)
-				this.$emit("totcal",this.price)
+				// props의 가격도 this로 접근이 된다.
+				
+				this.$emit("totcal",this.price, this.name) // 매개변수 2개를 전달한다.
+				// @이벤트 = "이벤트핸들러 함수" 
+				// 이벤트명과 이벤트 핸들러 함수는 다르다.
+				// 이벤트은 특정한 이벤트를 처리할 때, 이벤트 자체를 의미,
+				// 이벤트 핸들러 함수는 그 이벤트로 처리되는 기능 함수이다.
+				// <comp @totcal = "allprice"
 			},
-			calcu2:function(price2){
+			calcu2:function(name2, price2){
 				console.log("가격2:"+price2)
-				this.$emit("totcal",price2)
+				this.$emit("totcal",price2, name2)
 			},
 			
 		}
@@ -36,12 +43,14 @@
 	$(document).ready(function(){
 		var vm = new Vue({
 			el:".container",
-			data:{msg:"시작!!(뷰와함께)", sum:0},
+			data:{msg:"시작!!(뷰와함께)", sum:0, buyList:""},
 			methods:{
-				allprice:function(price){
+				allprice:function(price,name){
 					this.sum+=parseInt(price)
+					this.buyList+=name+" ";
 				}
 			}
+			// <h3>구매한 물건목록:{{buyList}}</h3>
 		});	
 	});
 	// 템플릿
@@ -60,40 +69,12 @@
 <div class="container">
 	<div class="jumbotron text-center">
 	  <h2 >{{msg}}</h2>
+	  <h3>구매한 물건목록:{{buyList}}</h3>
 	  <h3>구매한 총가격:{{sum}}</h3>
 	  <comp name="사과" price="3000" @totcal="allprice"></comp>
 	  <comp name="바나나" price="4000" @totcal="allprice"></comp>
 	  <comp name="딸기" price="12000" @totcal="allprice"></comp>
 	</div>
-	<form id="frm01" class="form-inline"  method="post">
-  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input class="form-control mr-sm-2" placeholder="제목" />
-	    <input class="form-control mr-sm-2" placeholder="내용" />
-	    <button class="btn btn-info" type="submit">Search</button>
- 	</nav>
-	</form>
-   <table class="table table-hover table-striped">
-   	<col width="10%">
-   	<col width="50%">
-   	<col width="15%">
-   	<col width="15%">
-   	<col width="10%">
-    <thead>
-    
-      <tr class="table-success text-center">
-        <th>번호</th>
-        <th>제목</th>
-        <th>작성자</th>
-        <th>작성일</th>
-        <th>조회</th>
-      </tr>
-    </thead>	
-    <tbody>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    	<tr><td></td><td></td><td></td><td></td><td></td></tr>
-    </tbody>
-	</table>       
 </div>
 </body>
 </html>
