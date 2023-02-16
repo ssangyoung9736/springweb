@@ -136,7 +136,7 @@
 			A20_CalendarMapper.xml
 		dao
 			A20_CalendarDao.java
-			public List<Calendar> calList().;	
+			public List<Calendar> calList();	
 		mapper
 			15:05~	
 			
