@@ -22,6 +22,7 @@
 		<mapper resource="resource/A04_SalMapper.xml"/>
 		<mapper resource="resource/A05_FileMapper.xml"/>
 		<mapper resource="resource/A20_CalendarMapper"/>
+		
 	</mappers>
 
 </configuration>

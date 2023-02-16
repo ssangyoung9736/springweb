@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset='utf-8' />
+<script src="/springweb/a00_com/jquery.min.js"></script>
 <script src='/springweb/a00_com/dist/index.global.js'></script>
+
 <script>
   // 위 js를 사용할 수 있게 같은 폴드에 있는 dist 폴드를
   // 복사해서 webapp/a00_com  폴드하위에 넣어주세요.
@@ -39,75 +41,24 @@
       },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: '2월의 첫날(시간)',
-          start: '2023-02-02T15:00:00',
-          end: '2023-02-02T18:00:00',
-          backgroundColor:"navy",
-          textColor:"yellow",
-          allDay:true
-        },
-        {
-          title: 'Long Event',
-          start: '2023-02-07',
-          end: '2023-02-09',
-          backgroundColor:"navy",
-          textColor:"yellow"
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-02-09T16:00:00'
-        },
-        {
-          groupId: 999,
-          title: 'Repeating Event',
-          start: '2023-02-16T16:00:00'
-        },
-        {
-            groupId: 999,
-            title: 'Repeating Event',
-            start: '2023-02-21T16:00:00'
-        },        
-        {
-          title: 'Conference',
-          start: '2023-02-11',
-          end: '2023-02-13'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-02-12T10:30:00',
-          end: '2023-02-12T12:30:00'
-        },
-        {
-          title: 'Lunch',
-          start: '2023-02-12T12:00:00'
-        },
-        {
-          title: 'Meeting',
-          start: '2023-02-12T14:30:00'
-        },
-        {
-          title: 'Happy Hour',
-          start: '2023-02-12T17:30:00'
-        },
-        {
-          title: 'Dinner',
-          start: '2023-02-12T20:00:00'
-        },
-        {
-          title: 'Birthday Party',
-          start: '2023-02-13T07:00:00'
-        },
-        {
-          title: 'Click for Google',
-          url: 'http://google.com/',
-          start: '2023-02-28'
-        }
-      ]
+   	  // 상단에 jquery lib 호출	
+      events:function(info, successCallback, failureCallback){
+			$.ajax({
+				type:"post",
+				url:"/springweb/calendarAjax.do",
+				dataType:"json",
+				success:function(data){
+					console.log(data.callist)
+					successCallback(data.callist)
+				},
+				error:function(err){
+					console.log(err)
+				}
+			})
+		} 
     });
-
+	
+	
     calendar.render();
   });
 
