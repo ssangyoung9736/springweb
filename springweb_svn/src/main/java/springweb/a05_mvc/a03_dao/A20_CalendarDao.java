@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import springweb.z01_vo.Calendar;
 
-@Repository
 public interface A20_CalendarDao {
 	public List<Calendar> calList();
 }

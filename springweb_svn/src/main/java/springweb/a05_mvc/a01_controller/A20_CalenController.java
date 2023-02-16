@@ -14,6 +14,7 @@ import springweb.a05_mvc.a02_service.A20_CalendarService;
 public class A20_CalenController {
 	@Autowired(required=false)
 	private A20_CalendarService service;
+	
 	@GetMapping("/calendar.do")
 	public String calendar() {
 		return "WEB-INF\\views\\a05_mvc\\a20_fullcalendar.html";
