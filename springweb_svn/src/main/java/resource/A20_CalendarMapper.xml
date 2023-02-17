@@ -16,7 +16,7 @@
 	<insert id="insertCalendar" parameterType="calendar">
 		INSERT INTO calendar01 values(cal01_seq.nextval, 
 			#{title}, #{start},#{end}, #{writer},#{content},
-			#{backgroundColor},#{textColor}, #{allDay},#{url})
+			#{backgroundColor},#{textColor}, #{allDay},null)
 	</insert>	
 </mapper>		
 		

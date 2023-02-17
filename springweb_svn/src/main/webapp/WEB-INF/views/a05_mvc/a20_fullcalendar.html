@@ -103,7 +103,33 @@
 	
 	
     calendar.render();
+    
+    $("#regBtn").click(function(){
+    	if($("[name=title]").val()==""){
+    		alert("일정을 입력하세요")
+    		$("[name=title]").focus()
+    		return;
+    	}
+    	ajaxFun("insCalendar.do")
+    });
   });
+  	function ajaxFun(url){
+  		$.ajax({
+  			type:"post",
+  			url:"/springweb/"+url,
+  			data:$("form").serialize(), // form하위 데이터 요청형식변경
+  			dataType:"json",
+  			success:function(data){
+  				alert(data.msg)
+  				location.reload() 
+  				// 화면 refresh 전체데이터 로딩 처리
+  			},
+  			error:function(err){
+  				console.log(err)
+  			}
+  		})
+  	}
+  
   	// eventClick 함수에서   addForm(arg.event) 추가
 	function addForm(event){
   		console.log("# 상세화면 #")
