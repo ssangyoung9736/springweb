@@ -33,6 +33,22 @@
       //  select: function(arg)
       select: function(arg) {
     	  $("h2").click();
+          console.log("# 등록시 내용 # ")
+          console.log(arg) 
+          // 입력되는 기본 정보 재로딩 초기화
+          $("form")[0].reset()
+          
+          $("#modalTitle").text("일정등록")
+          $("#regBtn").show()
+          $("#uptBtn").hide()
+          $("#delBtn").hide()
+          $("[name=start]").val(arg.start.toISOString())
+          $("#start").val(arg.start.toLocaleString())
+          $("[name=end]").val(arg.end.toISOString())
+          $("#end").val(arg.end.toLocaleString())
+          $("[name=allDay]").val(arg.allDay?1:0);
+          $("#allDay").val(""+arg.allDay)
+    	  
     	  // 초기 등록시 이벤트 핸들러
     	/*
         var title = prompt('일정 등록:');
@@ -52,9 +68,14 @@
       
       eventClick: function(arg) {
     	 // 등록된 데이터 이벤트 핸들러
-    	 console.log("#클릭한 현재일#")
-    	 console.log(arg.event)
-    	 alert("상세데이터 로딩:"+arg.event.title)
+    	  $("h2").click();
+          console.log(arg) 
+          // 입력되는 기본 정보 재로딩 초기화
+          $("#modalTitle").text("일정상세화면")
+          $("#regBtn").hide()
+          $("#uptBtn").show()
+          $("#delBtn").show()
+    	  addForm(arg.event)	
     	/*  
         if (confirm('Are you sure you want to delete this event?')) {
           	arg.event.remove()
@@ -83,7 +104,34 @@
 	
     calendar.render();
   });
-
+  	// eventClick 함수에서   addForm(arg.event) 추가
+	function addForm(event){
+  		console.log("# 상세화면 #")
+  		console.log(event)
+        $("form")[0].reset()
+        $("[name=id]").val(event.id)
+        $("[name=title]").val(event.title)
+        $("[name=textColor]").val(event.textColor)
+        $("[name=backgroundColor]").val(event.backgroundColor)
+        $("[name=writer]").val(event.extendedProps.writer)   
+        $("[name=content]").val(event.extendedProps.content)
+        $("[name=url]").val(event.url)
+        $("[name=start]").val(event.start.toISOString())
+        $("#start").val(event.start.toLocaleString())
+        if(event.end==null){
+        	$("[name=end]").val(event.start.toISOString())
+        	$("#end").val(event.start.toLocaleString())
+        }else{
+        	$("[name=end]").val(event.end.toISOString())
+        	$("#end").val(event.end.toLocaleString())
+        }
+        $("[name=allDay]").val(event.allDay?1:0);
+        $("#allDay").val(""+event.allDay)		
+	
+		
+	}
+  
+  
 </script>
 <style>
 
@@ -109,25 +157,31 @@
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLongTitle">타이틀</h5>
+	        <h5 class="modal-title" id="modalTitle">타이틀</h5>
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
 	      <div class="modal-body">
 	        <form class="form" novalidate>
+	          <input type="hidden" name="id" value="0"/>
 	          <div class="mb-3">
 	            <label for="title">일정명</label>
-	            <input type="text" name="name" class="form-control" id="title" placeholder="일정타이틀입력" >
+	            <input type="text" name="title" class="form-control" id="title" placeholder="일정타이틀입력" >
 	          </div>
 	          <div class="row">
 	            <div class="col-md-6 mb-3">
 	              <label for="start">시작일</label>
-	              <input type="text" name="start" class="form-control" id="start" >
+	              <!-- 
+	              GMT 시간과 한국에서 사용되는 시간 +9차이
+	               -->
+	              <input type="text" id="start" class="form-control"  >
+	              <input type="hidden" name="start" class="form-control"  >
 	            </div>
 	            <div class="col-md-6 mb-3">
 	              <label for="end">종료일</label>
-	              <input type="text" name="end" class="form-control" id="end" >
+	              <input type="text" id="end" class="form-control">
+	              <input type="hidden" name="end" class="form-control">
 	            </div>  
 	          </div>
 	          <div class="row">
@@ -137,10 +191,14 @@
 	            </div>
 	            <div class="col-md-6 mb-3">
  	              <label for="allDay">종일여부</label>
-				  <select name="allDay" id="allDay" class="form-control" >
+ 	              <!-- 
+ 	              db : 1/0
+ 	               -->
+				  <select id="allDay" class="form-control" >
 				   	<option value="true">종일</option>
 				   	<option value="false">시간</option>
 				  </select>
+				  <input type="hidden" name="allDay"/>
 	            </div>  
 	          </div>
 	          <div class="row">
@@ -165,9 +223,9 @@
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">등록</button>
-	        <button type="button" class="btn btn-success">수정</button>
-	        <button type="button" class="btn btn-warning">삭제</button>
+	        <button id="regBtn" type="button" class="btn btn-primary">등록</button>
+	        <button id="uptBtn" type="button" class="btn btn-success">수정</button>
+	        <button id="delBtn" type="button" class="btn btn-warning">삭제</button>
 	      </div>
 	    </div>
 	  </div>
