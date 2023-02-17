@@ -226,6 +226,13 @@
 				  </select>
 				  <input type="hidden" name="allDay"/>
 	            </div>  
+	              <script type="text/javascript">
+	              	$("#allDay").change(function(){
+	              		$("[name=allDay]").val($(this).val()=='true'?1:0);
+	      	        })
+	              	// 16:05~~
+	              </script>	
+	            
 	          </div>
 	          <div class="row">
 	            <div class="col-md-6 mb-3">

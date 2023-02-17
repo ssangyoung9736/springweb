@@ -204,13 +204,44 @@
 		----------------------------------------------	
 	2) 화면단 처리
 		- select: function(arg){} 시 처리할 내용
-			
+			arg에서 나오는 기본정보를 다이얼로그 박스에 입력
+				시작일/종료일/종일여부
+			입력/상세 화면 구분
+				타이틀 변경
+				기능 버튼 hide/show
+		- eventClick: function(arg) { 일정 상세화면
+		
+				
 		- 다이얼로그 로딩
 			입력할 항목 form객체로 처리
-		- $.ajax({}) 처리 및 controller 호출
 			
-	
-	
+			
+			
+		- $.ajax({}) 처리 및 controller 호출
+			등록 버튼 클릭시, ajax호출 처리..
+			
+			
+			
+		id
+		title
+		start
+		end
+		writer
+		content
+		backgroundColor
+		textColor
+		allDay
+		url
+		
+		form 화면 구성	
+		타이틀
+		시작일 종료일
+		작성자 종일여부
+		내용(textarea>
+		일정글자색상 일정배경색상 type=color
+		외부링크주소	
+		------------
+		
 	
 	    	
 	    	
