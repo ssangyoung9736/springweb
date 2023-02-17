@@ -14,6 +14,7 @@
 <template id="tmp01">
 	<div>
 		<button @click="calcu">과일가격:{{price}}</button>
+		<button @click="calcu2(price)">과일가격:{{price}}</button>
 	</div>
 </template>
 <script type="text/javascript">
@@ -24,7 +25,12 @@
 			calcu:function(){
 				console.log("가격:"+this.price)
 				this.$emit("totcal",this.price)
-			}
+			},
+			calcu2:function(price2){
+				console.log("가격2:"+price2)
+				this.$emit("totcal",price2)
+			},
+			
 		}
 	})
 	$(document).ready(function(){

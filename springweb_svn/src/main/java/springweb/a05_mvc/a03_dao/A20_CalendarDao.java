@@ -8,4 +8,5 @@ import springweb.z01_vo.Calendar;
 
 public interface A20_CalendarDao {
 	public List<Calendar> calList();
+	public void insertCalendar(Calendar ins);
 }
