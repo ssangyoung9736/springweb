@@ -241,6 +241,29 @@
 		일정글자색상 일정배경색상 type=color
 		외부링크주소	
 		------------
+# url 외부링크 처리
+1. 상세화면 로딩과 바로 주소 이동이 기능적을 겹쳐서, 상세화면으로
+	처리할려면 속성을 사용자 정의 속성으로 변경 필요
+2. vo  
+	1) url ==> urllink 변경
+3. mapper.xml
+	1) resultmap
+		url ==> urllink 추가
+	2) insert 부분에
+		url ==> urllink 	
+4. 화면단(a20_fullcalendar.html)
+	1) eventclick함수
+		function addForm()
+			$("[name=urllink]").val(
+				event.extendedProps.urllink)
+	2) 모달 창의 form 데이터
+		<input name="url" ==> urllink
+		
+	3) $("[name=urllink]").dblclick(function(){
+			if(confirm("페이지이동하시겠습니까?")){
+				location.href=$(this).val()
+			}
+	   })  					
 		
 	
 	    	
