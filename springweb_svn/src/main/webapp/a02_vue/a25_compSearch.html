@@ -12,7 +12,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <template id="schTmp">
-  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  	<nav class="navbar navbar-expand-sm bg-dark navbar-dark"
+  		>
 	    <input @keyup.13="search" v-model="ename" class="form-control mr-sm-2" placeholder="사원명" />
 	    <input @keyup.13="search"  v-model="job" class="form-control mr-sm-2" placeholder="직책명" />
 	    <button @click="search" class="btn btn-info" type="button">Search</button>
@@ -23,6 +24,9 @@ Vue.component("search-comp",{
 	template:"#schTmp",
 	data:function(){
 		return {ename:"",job:""}
+	},
+	created:function(){
+		this.search()
 	},
 	methods:{
 		search:function(){
