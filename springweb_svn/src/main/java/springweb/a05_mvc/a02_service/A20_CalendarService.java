@@ -19,4 +19,12 @@ public class A20_CalendarService {
 	public void insertCalendar(Calendar ins) {
 		dao.insertCalendar(ins);
 	}
+	public void uptCalendar(Calendar upt) {
+		dao.uptCalendar(upt);
+	}
+	public void delCalendar(int id) {
+		dao.delCalendar(id);
+	}
+
+	
 }

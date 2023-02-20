@@ -264,11 +264,76 @@
 				location.href=$(this).val()
 			}
 	   })  					
+# 일정 수정 삭제 처리		
+1. 처리 프로세스
+	1) 상세화면에서 일정을 내용을 수정하거나 스크롤로 일정을 변경을 할 때,
+		수정이 되게 처리한다.
+	2) 삭제버튼 클릭시, 삭제 처리된다.
 		
-	
-	    	
-	    	
-	    
+2. 개발 순서
+	1) sql 작성	    	
+	    update calendar01	
+	       set title = #{title},
+	           start01 = #{start},
+	           end01= #{end},
+	           writer = #{writer},
+	           content = #{content},
+	           textcolor = #{textColor},
+	           backgroundcolor = #{backgroundColor},
+	           allday = #{allDay},
+	           url = #{urllink}
+	      where id = #{id}
+		delete
+		from calendar01
+		where id = #{id}
+	2) vo
+	3) 공통 mybatis
+	4) dao 
+		public void uptCalendar(Calendar upt);
+		public void delCalendar(int id);
+	5) mapper.xml
+		<update id="uptCalendar" parameterType="calendar">
+		    update calendar01	
+		       set title = #{title},
+		           start01 = #{start},
+		           end01= #{end},
+		           writer = #{writer},
+		           content = #{content},
+		           textcolor = #{textColor},
+		           backgroundcolor = #{backgroundColor},
+		           allday = #{allDay},
+		           url = #{urllink}
+		      where id = #{id}		
+		<delete id="delCalendar" parameterType="int">
+			delete
+			from calendar01
+			where id = #{id}			
+	7) service
+	8) controller
+		/uptCalendar.do
+		/delCalendar.do
+	9) 화면단에서 처리
+		$("#uptBtn").click(function(){
+			if(confirm("수정하시겠습니까?")){
+				ajaxFun("uptCalendar.do")
+			}
+		})	     
+		$("#delBtn").click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				ajaxFun("delCalendar.do")
+			}
+		})	 
+	10) 일정 스크롤 변경시, 이벤트 처리
+		eventDrop:function(info){
+			addForm(info.event)
+			ajaxFun("uptCalendar.do")
+		}
+	11) 일정 확장 변경시 이벤트 처리
+		eventResize:function(info){
+			addForm(info.event)
+			ajaxFun("uptCalendar.do")
+		}	 		           	
+	    // 12:05
 	    
 	
 

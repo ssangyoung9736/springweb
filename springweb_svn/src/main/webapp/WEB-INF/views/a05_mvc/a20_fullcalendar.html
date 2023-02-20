@@ -90,6 +90,16 @@
         }
     	*/
       },
+      // 클릭하여 스크롤 해서 다른 날짜로 변경 했을 때,
+      eventDrop:function(info){
+			addForm(info.event)
+			ajaxFun("uptCalendar.do")
+	  },
+	  // 시간일정에서 하단 부분을 스크롤해서 일정 범위를 변경했을 때.
+	  eventResize:function(info){
+			addForm(info.event)
+			ajaxFun("uptCalendar.do")
+	  },
       editable: true,
       dayMaxEvents: true, // allow "more" link when too many events
    	  // 상단에 jquery lib 호출	
@@ -125,6 +135,17 @@
     	}
     	ajaxFun("insCalendar.do")
     });
+	$("#uptBtn").click(function(){
+		if(confirm("수정하시겠습니까?")){
+			ajaxFun("uptCalendar.do")
+		}
+	})	     
+	$("#delBtn").click(function(){
+		if(confirm("삭제하시겠습니까?")){
+			ajaxFun("delCalendar.do")
+		}
+	})	    
+    
     $("[name=urllink]").dblclick(function(){
 		if(confirm("페이지이동하시겠습니까?")){
 			window.open($(this).val())
