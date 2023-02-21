@@ -31,6 +31,10 @@ Vue.component("search-comp",{
 	methods:{
 		search:function(){
 			this.$emit("schemp",this.ename, this.job) 
+			// <search-comp @이벤트명="상위에 선언한 이벤트핸들러 메서드"
+			// <search-comp @schemp="searchEmp"
+			// 이벤트 핸들러메서드메서드에 매개변수 2개로 ename, job전달
+			// searchEmp:function(ename, job)
 		}
 	}
 })
@@ -67,6 +71,17 @@ Vue.component("list-comp",{
 	template:"#listTmp",
 	props:["emplist"]
 })
+/*
+		     Vue() 최상위(el:".container")
+ 
+	컴포넌트1(#schTmp),     컴포넌트2(#listTmp)
+ 
+상위에서 하위로 데이터 전달(props통한 속성)
+하위에서 상위로 데이터 전달(이벤트)
+	
+ */
+
+
 
 	$(document).ready(function(){
 		var vm = new Vue({
@@ -93,7 +108,6 @@ Vue.component("list-comp",{
 </script>
 </head>
 <body>
-
 <div class="container">
 	<div class="jumbotron text-center">
 	  <h2 >{{msg}}</h2>
