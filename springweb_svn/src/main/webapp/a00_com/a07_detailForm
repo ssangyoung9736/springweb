@@ -7,6 +7,11 @@
 		border:1px solid green;
 	}
 </style>
+<div class="jumbotron text-center">
+  <h2>채팅</h2>
+</div>
+<div class="container">
+
 	<form method="post">
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend ">
@@ -28,4 +33,5 @@
 		<input type="button" class="btn btn-danger" value="삭제" id="delBtn"/>
 		<input type="button" class="btn btn-success" value="조회리스트" id="mainBtn"/>
 	</div>	
-	</form>		
+	</form>	
+</div>		
