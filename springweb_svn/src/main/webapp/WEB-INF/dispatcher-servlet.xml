@@ -95,4 +95,57 @@
 	</bean>
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 	<bean id="downloadViewer" class="springweb.a06_util.Z01_DownloadView"/>
+	<!-- 
+	2. 다국어 코드 등록 설정위치 지정
+	 -->
+	<bean id="messageSource" 
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message.msg</value> <!-- 패키지명 기준을 java밑에 message패기지에 msg파일설정 -->
+			</list>
+		</property>	
+	</bean>
+	<!-- 
+	1. 언어 변환 처리를 위한 객체 등록 -->
+	<bean id="localeResolver" 
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+	<!-- 
+	#  웹소켙통신을 위한 객체 선언
+	1. handlermapping, adapter
+	 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	<!-- 
+	# 특정 url주소를 통해서 handler 객체 호출 및 소켙session 처리
+		클라이언트 : 웹소켓 js객체 chat-ws.do 서버에 핸들객체 호출
+	 -->
+	<mvc:default-servlet-handler/> 
+	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat-ws.do"/>
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		
+		</websocket:handshake-interceptors>	
+	</websocket:handlers>
+	<!-- 
+	# 메일 발송 모듈 객체 선언.(스프링 프레임워 사용)
+	 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="ssangyoung5555@gmail.com"/>
+		<property name="password" value="vytxyzxlmyldjkst"/>
+		<property name="javaMailProperties" >
+			<props>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+			</props>
+		</property>
+	</bean>	 
+	
 </beans>      

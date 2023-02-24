@@ -167,7 +167,177 @@
 				}
 			})
 		}
+# fullcandar 데이터 등록하기
+1. 진행 프로세스
+	1) 특정 일정을 클릭하여,
+	2) 기본 데이터(시작일/종료일,전체일/시간)를 포함한 등록할 항목이
+		있는 다이얼로그화면을 로딩한다.
+	3) DB에 등록할 각 항목(타이틀, 내용, 작성자, 배경색상,
+		 글자색상, 링크할 url)을 입력 후, 등록 버튼 클릭시, ajax로
+		controller를 호출하여 등록 처리한다.
+	4) 해당 내용을 처리 후, 초기화면에서 등록된 내용을 확인할 수 있다.
+2. 핵심 기능
+	1) DB 등록 처리(백앤드단)
+	2) 화면 인터페이스 
+		다이얼로그 박스 로딩
+		select: function(arg) 로 받은 데이터를
+			- arg에서 어떤 값이 초기에 로딩되는지 확인
+		form 요소객체에 로딩하여 출력 처리
+	3) ajax로 입력된 데이터 controller단에 전송 처리	
+
+3. 개발 순서	
+	1) 일정 등록(백앤드 처리)
+		- DB
+			sql
+				INSERT INTO calendar01 values(cal01_seq.nextval, '첫번째 일정 등록',
+				'2023-02-16T09:00:00','2023-02-16T23:00:00', '홍길동','내용',
+				'#0404B4','#FFFF00',1,'https://fullcalendar.io/docs/event-display');
+		    vo
+		    공통 mybatis
+		    dao
+		    	public void insertCalendar(Calendar ins);
+		    mapper
+		    	
+		service ==> controller
+		controller
+			/insCalendar.do 기능메서드 추가.
+		----------------------------------------------	
+	2) 화면단 처리
+		- select: function(arg){} 시 처리할 내용
+			arg에서 나오는 기본정보를 다이얼로그 박스에 입력
+				시작일/종료일/종일여부
+			입력/상세 화면 구분
+				타이틀 변경
+				기능 버튼 hide/show
+		- eventClick: function(arg) { 일정 상세화면
+		
+				
+		- 다이얼로그 로딩
+			입력할 항목 form객체로 처리
+			
+			
+			
+		- $.ajax({}) 처리 및 controller 호출
+			등록 버튼 클릭시, ajax호출 처리..
+			
+			
+			
+		id
+		title
+		start
+		end
+		writer
+		content
+		backgroundColor
+		textColor
+		allDay
+		url
+		
+		form 화면 구성	
+		타이틀
+		시작일 종료일
+		작성자 종일여부
+		내용(textarea>
+		일정글자색상 일정배경색상 type=color
+		외부링크주소	
+		------------
+# url 외부링크 처리
+1. 상세화면 로딩과 바로 주소 이동이 기능적을 겹쳐서, 상세화면으로
+	처리할려면 속성을 사용자 정의 속성으로 변경 필요
+2. vo  
+	1) url ==> urllink 변경
+3. mapper.xml
+	1) resultmap
+		url ==> urllink 추가
+	2) insert 부분에
+		url ==> urllink 	
+4. 화면단(a20_fullcalendar.html)
+	1) eventclick함수
+		function addForm()
+			$("[name=urllink]").val(
+				event.extendedProps.urllink)
+	2) 모달 창의 form 데이터
+		<input name="url" ==> urllink
+		
+	3) $("[name=urllink]").dblclick(function(){
+			if(confirm("페이지이동하시겠습니까?")){
+				location.href=$(this).val()
+			}
+	   })  					
+# 일정 수정 삭제 처리		
+1. 처리 프로세스
+	1) 상세화면에서 일정을 내용을 수정하거나 스크롤로 일정을 변경을 할 때,
+		수정이 되게 처리한다.
+	2) 삭제버튼 클릭시, 삭제 처리된다.
+		
+2. 개발 순서
+	1) sql 작성	    	
+	    update calendar01	
+	       set title = #{title},
+	           start01 = #{start},
+	           end01= #{end},
+	           writer = #{writer},
+	           content = #{content},
+	           textcolor = #{textColor},
+	           backgroundcolor = #{backgroundColor},
+	           allday = #{allDay},
+	           url = #{urllink}
+	      where id = #{id}
+		delete
+		from calendar01
+		where id = #{id}
+	2) vo
+	3) 공통 mybatis
+	4) dao 
+		public void uptCalendar(Calendar upt);
+		public void delCalendar(int id);
+	5) mapper.xml
+		<update id="uptCalendar" parameterType="calendar">
+		    update calendar01	
+		       set title = #{title},
+		           start01 = #{start},
+		           end01= #{end},
+		           writer = #{writer},
+		           content = #{content},
+		           textcolor = #{textColor},
+		           backgroundcolor = #{backgroundColor},
+		           allday = #{allDay},
+		           url = #{urllink}
+		      where id = #{id}		
+		<delete id="delCalendar" parameterType="int">
+			delete
+			from calendar01
+			where id = #{id}			
+	7) service
+	8) controller
+		/uptCalendar.do
+		/delCalendar.do
+	9) 화면단에서 처리
+		$("#uptBtn").click(function(){
+			if(confirm("수정하시겠습니까?")){
+				ajaxFun("uptCalendar.do")
+			}
+		})	     
+		$("#delBtn").click(function(){
+			if(confirm("삭제하시겠습니까?")){
+				ajaxFun("delCalendar.do")
+			}
+		})	 
+	10) 일정 스크롤 변경시, 이벤트 처리
+		eventDrop:function(info){
+			addForm(info.event)
+			ajaxFun("uptCalendar.do")
+		}
+	11) 일정 확장 변경시 이벤트 처리
+		eventResize:function(info){
+			addForm(info.event)
+			ajaxFun("uptCalendar.do")
+		}	 		           	
+	    // 12:05
+	    
 	
+
+
 	
 	
 			
