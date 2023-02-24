@@ -62,16 +62,30 @@
 		// 3. 메시지보내기1(버튼)
 		$("#sendBtn").click(function(){
 			console.log("메시지1")
+			wsocket.send( $("#id").val()+":"+$("#msg").val() )
+			$("#msg").val("").focus()	
+			
 		})
 		// 4. 메시지보내기2(enter키) 
 		$("#msg").keyup(function(){
 			if(event.keyCode==13){
 				console.log("메시지2")
+				wsocket.send( $("#id").val()+":"+
+								$("#msg").val() )
+				$("#msg").val("").focus()				
 			}
 		})	
 		// 5. 종료 버튼    10:05~
 		$("#exitBtn").click(function(){
 			console.log("종료")
+			if(confirm("접속을 종료하시겠습니까?")){
+				wsocket.send( $("#id").val()+"님 연결을 종료하였습니다." )
+				// 핸들러 클래스의 afterConnectionClosed 메서드 호출
+				wsocket.close()
+				$("#chatMessageArea").text("")
+				$("#id").val("").focus()
+			}
+			
 		})
 		// 6. 전송해보는 메시지 처리(socket 객체를 통해서 처리)
 	});
