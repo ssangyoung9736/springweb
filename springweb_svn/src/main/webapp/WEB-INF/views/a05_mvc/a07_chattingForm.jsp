@@ -84,9 +84,21 @@
 		wsocket.onopen=function(evt){
 			console.log(evt)
 			// 메시지 전송 메서드 호출 서버상 handleMessage() 메서드 연동
-			wsocket.send("msg:"+$("#id").val()+":연결 접속했습니다.")
+			wsocket.send($("#id").val()+"님연결 접속했습니다.")
+		}
+		// 2. 메시지를 받을 때, 처리 내용.
+		//    서버 핸들러에 ws.sendMessage(message);에 의해 push방식으로 메시지
+		//    전달 받음..
+		wsocket.onmessage=function(evt){
+			var revMsg = evt.data
+			revMsgFun(revMsg)
 		}
 	}
+	function revMsgFun(msg){
+		var msgObj = $("<div></div>").text(msg)
+		$("#chatMessageArea").append(msgObj)
+	}
+	
 	
 	
 </script>
