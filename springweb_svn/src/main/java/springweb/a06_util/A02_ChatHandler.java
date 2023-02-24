@@ -1,5 +1,6 @@
 package springweb.a06_util;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,12 +31,21 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		// 받은 메시지
 		String msg = (String)message.getPayload();
+		String []msgArry = msg.split(":");
+		/*
+		// 연결을 종료하였습니다.
+		// 연결 접속했습니다.
+		 * */
+		//if( msgArry[0].equals("연결 접속했습니다") ) 
+		conList(msgArry);
 		System.out.println("#[핸들러메서드:메시지]"+msg);
-		
+		//System.out.println("#[핸들러메서드:접속자]"+memStr);
 		// 전달할 클라이언트에게 전달.
 		System.out.println("\t 메시지 전달 대상자:");
 		for(WebSocketSession ws:users.values()) {
+			
 			ws.sendMessage(message);
+
 			System.out.print(ws.getId()+", ");
 		}
 		System.out.println();
@@ -54,7 +64,20 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 				session.getId()+":"+exception.getMessage());
 		
 	}
-	
+	ArrayList<String> memList = new ArrayList<>();
+	public ArrayList<String> conList(String[] msgArr) {
+		// 연결을 종료하였습니다.
+		// 연결 접속했습니다.
+		if(!msgArr[0].equals("")) {
+			if(msgArr[1].equals("연결 접속했습니다.")) {
+				if(!memList.contains(msgArr[0])) memList.add(msgArr[0]);
+			}else {
+				if(memList.contains(msgArr[0])) memList.remove(msgArr[0]);
+			}
+			
+		}
+        return memList;
+	}
 	
 	
 }

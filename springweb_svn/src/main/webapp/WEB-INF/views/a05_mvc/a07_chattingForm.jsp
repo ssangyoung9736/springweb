@@ -34,29 +34,23 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	var wsocket;
+	var members;
 	$(document).ready(function(){
 		<%-- 
 		
 		--%>
+		conUsers()
 		// 이벤트 핸들러 익명 함수 호출
 		// 1. 접속시1(버튼)
 		$("#enterBtn").click(function(){
 			console.log("접속1")
-			if($("#id").val()==""){
-				alert("아이디를 입력하셔야 접속가능합니다.")
-			}else{
-				conn()
-			}
+			cKId()
 		})
 		// 2. 접속시2(enter키) 
 		$("#id").keyup(function(){
 			if(event.keyCode==13){
 				console.log("접속2")
-				if($("#id").val()==""){
-					alert("아이디를 입력하셔야 접속가능합니다.")
-				}else{
-					conn()
-				}
+				cKId()
 			}
 		})
 		// 3. 메시지보내기1(버튼)
@@ -78,17 +72,46 @@
 		// 5. 종료 버튼    10:05~
 		$("#exitBtn").click(function(){
 			console.log("종료")
+			if($("#id").val()!="")
 			if(confirm("접속을 종료하시겠습니까?")){
 				wsocket.send( $("#id").val()+":연결을 종료하였습니다." )
 				// 핸들러 클래스의 afterConnectionClosed 메서드 호출
 				wsocket.close()
+				conUsers()
 				$("#chatMessageArea").text("")
 				$("#id").val("").focus()
+				$("#id").removeAttr("readOnly","")
 			}
 			
 		})
 		// 6. 전송해보는 메시지 처리(socket 객체를 통해서 처리)
 	});
+	function cKId(){
+		console.log(members)
+		var idVal = $("#id").val()
+		
+		
+		if($("#id").val()==""){
+			alert("아이디를 입력하셔야 접속가능합니다.")
+		}else{
+			var isNotValid=false;
+			$(members).each(function(idx, mem){
+				if(idVal==mem){
+					isNotValid=true;
+				}
+			})
+			if(isNotValid){
+				alert("접속한 동일한 아이디가 있습니다.")
+				$("#id").val("").focus()
+			}else{
+				conn()
+				$("#id").attr("readOnly","readOnly")
+			}
+			
+		}		
+		
+	}
+	
 	// 소캩 통신 관련 공통메서드 처리
 	function conn(){
 		// 스프링 컨테이너 안에 선언된 서버 핸들러 호출 객체 호출과 함께 소켓 서버 접속
@@ -98,8 +121,11 @@
 		wsocket.onopen=function(evt){
 			console.log(evt)
 			// 메시지 전송 메서드 호출 서버상 handleMessage() 메서드 연동
-			wsocket.send($("#id").val()+":연결 접속했습니다.")
+			wsocket.send($("#id").val()+
+					":연결 접속했습니다.")
 		}
+		// 연결을 종료하였습니다.
+		// 연결 접속했습니다.
 		// 2. 메시지를 받을 때, 처리 내용.
 		//    서버 핸들러에 ws.sendMessage(message);에 의해 push방식으로 메시지
 		//    전달 받음..
@@ -115,7 +141,10 @@
 		//   	해당 구분자로 배열을 만든다.
 		// msg[0] : 김길동
 		// msg[1] : 연결 접속했습니다.
-		var sndId = msg.split(":")[0]
+		var msgArr= msg.split(":");
+		console.log("# 메시지 배열 #")
+		console.log(msgArr)
+		var sndId = msgArr[0]
 		// 현재 접속한 아이디와 서버에서 전송하는 아이디 비교
 		// 같으면 내가 보낸 메시지 이므로 오른쪽 정렬
 		// 다르면 다른 사람의 메시지이므로 왼쪽 정렬
@@ -139,6 +168,25 @@
 		var height = 
 			parseInt($("#chatMessageArea").height())
 		$("#chatArea").scrollTop(height)	
+		conUsers()
+	}
+	function conUsers(){
+		$.ajax({
+			url:"${path}/chGroup.do",
+			dataType:"json",
+			success:function(data){
+				members = data.group
+				var add=""
+				$(data.group).each(function(idx,group ){
+					console.log(idx)
+					console.log(group)
+					add+="<button class='btn btn-outline-primary'  class='btn btn-success' >"+group+"</button>"
+				})
+				$(".group").html(add)
+				//$("#group").val(data.group);
+				// <button class="group"  class="btn btn-success" ></button>
+			}
+		})		
 	}
 </script>
 </head>
@@ -159,6 +207,16 @@
 		<input id="id" class="form-control"  placeholder="접속할 아이디를 입력하세요"/>
 		<input type="button" class="btn btn-success" value="채팅입장" id="enterBtn"/>
 		<input type="button" class="btn btn-danger" value="나가기" id="exitBtn"/>			
+	</div>	
+	<div class="input-group mb-3">	
+		<div class="input-group-prepend">
+			<span class="input-group-text  justify-content-center">접속자들</span>
+		</div>
+		<div class="input-group-append group">
+		</div>
+		
+		
+				
 	</div>	
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend">
