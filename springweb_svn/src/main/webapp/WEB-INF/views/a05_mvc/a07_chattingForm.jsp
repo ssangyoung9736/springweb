@@ -123,22 +123,30 @@
 			alignOpt="right"
 		}
 		// width를 설정해서 정렬 처리
-		console.log("넓이:"+$("#chatArea").width());
-		
+		console.log("넓이:"+$("#chatArea").width());	
 		// $("요소객체").text("메시지내용")
 		// .attr("align","정렬속성")
 		// .css("width","넓이 속성")
 		var msgObj =$("<div></div>").text(msg
 				).attr("align",alignOpt).css("width",
-						$("#chatArea").width())
+						$("#chatArea").width()-20)
 		$("#chatMessageArea").append(msgObj)
+		// 스크롤링 처리
+		// 1. 전체 해당 데이터의 높이를 구한다.
+		// 2. 포함하고 있는 부모 객체(#chatArea)에서
+		//    스크롤 기능메서드로 스크롤되겡 처리한다.
+		//    scrollTop()
+		var height = 
+			parseInt($("#chatMessageArea").height())
+		$("#chatArea").scrollTop(height)	
 	}
-	
-	
-	
 </script>
 </head>
-
+<style>
+	#chatArea{
+		overflow:scroll
+	}
+</style>
 <body>
 <div class="jumbotron text-center">
   <h2>채팅</h2>
