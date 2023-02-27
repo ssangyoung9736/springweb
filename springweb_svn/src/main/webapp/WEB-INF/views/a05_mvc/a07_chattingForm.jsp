@@ -33,7 +33,12 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
-	
+	window.addEventListener("resize", function() {
+		//console.log("크기 변경")
+		//console.log("#chatArea 크기 변경:"+$("#chatArea").width())
+		//console.log("#chatMessageArea크기 변경:"+$("#chatMessageArea>div").width())
+		$("#chatMessageArea>div").width($("#chatArea").width()-20)
+	});	
 	// 전역변수 설정 : 핸들러나 다른 기능메서드를 넘어 사용해야 되기에
 	var wsocket;
 	var members=[];
@@ -189,6 +194,11 @@
 				).attr("align",alignOpt).css("width",
 						$("#chatArea").width()-20)
 		$("#chatMessageArea").append(msgObj)
+		
+		
+		
+
+		
 		// 스크롤링 처리
 		// 1. 전체 해당 데이터의 높이를 구한다.
 		// 2. 포함하고 있는 부모 객체(#chatArea)에서
