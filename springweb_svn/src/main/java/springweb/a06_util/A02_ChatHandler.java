@@ -1,6 +1,7 @@
 package springweb.a06_util;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,7 +18,7 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 	private Map<String, WebSocketSession> users =
 				new ConcurrentHashMap();
 	// 중복되지 않게 접속 아이디 저장
-	private ArrayList<String> memList = new ArrayList<>();
+	private Map<String, String> ids = new ConcurrentHashMap();
 	
 	// 접속시, 기능메서드
 	@Override
@@ -38,8 +39,13 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 		// 연결을 종료하였습니다.
 		// 연결 접속했습니다.
 		 * */
-		//if( msgArry[0].equals("연결 접속했습니다") ) 
-		conList(msgArry);
+		if( msgArry[1].equals("연결 접속했습니다.") ) {
+			ids.put(session.getId(), msgArry[0]);
+		} 
+		if( msgArry[1].equals("연결을 종료하였습니다.") ) {
+			ids.remove(session.getId());
+		}		
+
 		System.out.println("#[핸들러메서드:메시지]"+msg);
 		//System.out.println("#[핸들러메서드:접속자]"+memStr);
 		// 전달할 클라이언트에게 전달.
@@ -57,6 +63,7 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		// 등록된 사용자에서 제거 처리
 		users.remove(session.getId());
+		ids.remove(session.getId());
 		System.out.println("#[핸들러메서드:접속종료]"+session.getId());
 	}
 	// 예외 처리
@@ -66,23 +73,15 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 				session.getId()+":"+exception.getMessage());
 		
 	}
-	public ArrayList<String> conList(String[] msgArr) {
-		// 연결을 종료하였습니다.
-		// 연결 접속했습니다.
-		// 접속자 아이디를 중복없이 처리하는 로직
-		if(!msgArr[0].equals("")) {
-			if(msgArr[1].equals("연결 접속했습니다.")) {
-				if(!memList.contains(msgArr[0])) 
-					memList.add(msgArr[0]);
-			} 
-			if(msgArr[1].equals("연결을 종료하였습니다.")){
-				if(memList.contains(msgArr[0])) 
-					memList.remove(msgArr[0]);
-			}
-			
+	public List<String> getIdx(){
+		List<String> list = new ArrayList<String>();
+		for(String id:ids.keySet()) {
+			list.add(ids.get(id));
 		}
-        return memList;
+		
+		return list;
 	}
+
 	
 	
 }

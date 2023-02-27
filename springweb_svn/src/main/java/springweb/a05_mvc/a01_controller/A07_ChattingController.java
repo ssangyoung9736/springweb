@@ -23,7 +23,7 @@ public class A07_ChattingController {
 	// /chGroup.do
 	@GetMapping("chGroup.do")
 	public String chGroup(Model d) {
-		d.addAttribute("group", chHandl.conList(new String[]{""}));
+		d.addAttribute("group", chHandl.getIdx());
 		return "pageJsonReport";
 	}
 	
