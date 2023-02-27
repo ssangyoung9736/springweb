@@ -98,8 +98,11 @@
 		if($("#id").val()==""){
 			alert("아이디를 입력하셔야 접속가능합니다.")
 		}else{
+			console.log(members)
+			console.log("접속자들")
 			var isNotValid=false;
 			$(members).each(function(idx, mem){
+				console.log(idVal+":"+mem)
 				if(idVal==mem){
 					isNotValid=true;
 				}
@@ -188,6 +191,7 @@
 			url:"${path}/chGroup.do",
 			dataType:"json",
 			success:function(data){
+				members = data.group
 				var add=""
 				$(data.group).each(function(idx,group ){
 					console.log(idx)
