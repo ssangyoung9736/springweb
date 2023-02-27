@@ -19,7 +19,8 @@ public class A07_ChattingController {
 		// a07_chattingForm.jsp
 		return "WEB-INF\\views\\a05_mvc\\a07_chattingForm.jsp";
 	}
-	
+	// /chatting.do
+	// /chGroup.do
 	@GetMapping("chGroup.do")
 	public String chGroup(Model d) {
 		d.addAttribute("group", chHandl.conList(new String[]{""}));

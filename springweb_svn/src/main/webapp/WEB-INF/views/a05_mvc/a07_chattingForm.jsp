@@ -33,12 +33,15 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
+	
+	// 전역변수 설정 : 핸들러나 다른 기능메서드를 넘어 사용해야 되기에
 	var wsocket;
 	var members;
 	$(document).ready(function(){
 		<%-- 
 		
 		--%>
+		// 화면 로딩시, ajax로 접속된 아이디 출력..
 		conUsers()
 		// 이벤트 핸들러 익명 함수 호출
 		// 1. 접속시1(버튼)
@@ -86,6 +89,7 @@
 		})
 		// 6. 전송해보는 메시지 처리(socket 객체를 통해서 처리)
 	});
+	// 아이디에 대한 유효성(공백, 접속된 아이디 제외), 처리 후, 접속..
 	function cKId(){
 		console.log(members)
 		var idVal = $("#id").val()
@@ -116,6 +120,9 @@
 	function conn(){
 		// 스프링 컨테이너 안에 선언된 서버 핸들러 호출 객체 호출과 함께 소켓 서버 접속
 		wsocket = new WebSocket("ws:localhost:7080/${path}/chat-ws.do")
+//		wsocket = new WebSocket("ws:localhost:7080/${path}/chat-ws.do")
+		//   고정아이피 기준으로 원격서버 주소를 localhost로 처리하여야
+		//   1:다 관계 채팅이 가능하다.
 		// 이벤트 핸들러 메서드 선언
 		// 1. 접속될 때.. 서버상 afterConnectionEstablished() 메서드와 연동
 		wsocket.onopen=function(evt){
@@ -170,6 +177,7 @@
 		$("#chatArea").scrollTop(height)	
 		conUsers()
 	}
+	// 등록된 사용자 리스트 ajax로 가져와서, 버튼으로 리스트 처리
 	function conUsers(){
 		$.ajax({
 			url:"${path}/chGroup.do",
@@ -205,8 +213,8 @@
 			<span class="input-group-text  justify-content-center">접속아이디</span>
 		</div>
 		<input id="id" class="form-control"  placeholder="접속할 아이디를 입력하세요"/>
-		<input type="button" class="btn btn-success" value="채팅입장" id="enterBtn"/>
-		<input type="button" class="btn btn-danger" value="나가기" id="exitBtn"/>			
+		<input id="enterBtn" type="button" class="btn btn-success" value="채팅입장"/>
+		<input id="exitBtn" type="button" class="btn btn-danger" value="나가기"/>			
 	</div>	
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend">
@@ -214,9 +222,6 @@
 		</div>
 		<div class="input-group-append group">
 		</div>
-		
-		
-				
 	</div>	
 	<div class="input-group mb-3">	
 		<div class="input-group-prepend">
@@ -231,7 +236,7 @@
 			<span class="input-group-text  justify-content-center">메시지</span>
 		</div>
 		<input id="msg" class="form-control" value="" placeholder="보낼 메시지 입력"/>
-		<input type="button" class="btn btn-info" value="메시지전송" id="sendBtn"/>		
+		<input id="sendBtn" type="button" class="btn btn-info" value="메시지전송"/>		
 	</div>		
 </div>		
 </body>

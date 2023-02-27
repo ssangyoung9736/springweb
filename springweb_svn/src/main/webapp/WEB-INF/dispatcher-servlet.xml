@@ -112,7 +112,7 @@
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 	<!-- 
 	#  웹소켙통신을 위한 객체 선언
-	1. handlermapping, adpater
+	1. handlermapping, adapter
 	 -->
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
