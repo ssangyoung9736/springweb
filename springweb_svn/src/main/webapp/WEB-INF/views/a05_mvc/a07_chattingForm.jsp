@@ -36,7 +36,7 @@
 	
 	// 전역변수 설정 : 핸들러나 다른 기능메서드를 넘어 사용해야 되기에
 	var wsocket;
-	var members;
+	var members=[];
 	$(document).ready(function(){
 		<%-- 
 		
@@ -110,6 +110,7 @@
 			}else{
 				conn()
 				$("#id").attr("readOnly","readOnly")
+				$("#msg").removeAttr("readOnly")
 			}
 			
 		}		
@@ -159,7 +160,7 @@
 			alignOpt="right"
 		}
 		// width를 설정해서 정렬 처리
-		console.log("넓이:"+$("#chatArea").width());	
+		//console.log("넓이:"+$("#chatArea").width());	
 		// $("요소객체").text("메시지내용")
 		// .attr("align","정렬속성")
 		// .css("width","넓이 속성")
@@ -174,16 +175,19 @@
 		//    scrollTop()
 		var height = 
 			parseInt($("#chatMessageArea").height())
-		$("#chatArea").scrollTop(height)	
+		//console.log("chatMessageArea 높이:"+height)
+		mx+=height+20
+		console.log("chatArea 높이:"+$("#chatArea").height())	
+		$("#chatArea").scrollTop(mx)	
 		conUsers()
 	}
+	var mx = 0
 	// 등록된 사용자 리스트 ajax로 가져와서, 버튼으로 리스트 처리
 	function conUsers(){
 		$.ajax({
 			url:"${path}/chGroup.do",
 			dataType:"json",
 			success:function(data){
-				members = data.group
 				var add=""
 				$(data.group).each(function(idx,group ){
 					console.log(idx)
@@ -235,7 +239,7 @@
 		<div class="input-group-prepend">
 			<span class="input-group-text  justify-content-center">메시지</span>
 		</div>
-		<input id="msg" class="form-control" value="" placeholder="보낼 메시지 입력"/>
+		<input id="msg" class="form-control" value="" placeholder="보낼 메시지 입력" readOnly/>
 		<input id="sendBtn" type="button" class="btn btn-info" value="메시지전송"/>		
 	</div>		
 </div>		
