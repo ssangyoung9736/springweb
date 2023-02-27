@@ -61,19 +61,16 @@
 			console.log("메시지1")
 			// 보내는사람아이디:메시지:받는사람아이디
 			// 보내는사람아이디:메시지:그룹
-			wsocket.send( $("#id").val()+":"+$("#msg").val() )
-			$("#msg").val("").focus()	
+			sendMsg()	
 			
 		})
 		// 4. 메시지보내기2(enter키) 
 		$("#msg").keyup(function(){
 			if(event.keyCode==13){
-				console.log("메시지2")
-				wsocket.send( $("#id").val()+":"+
-								$("#msg").val() )
-				$("#msg").val("").focus()				
+				sendMsg()			
 			}
 		})	
+
 		// 5. 종료 버튼    10:05~
 		$("#exitBtn").click(function(){
 			console.log("종료")
@@ -116,6 +113,7 @@
 				conn()
 				$("#id").attr("readOnly","readOnly")
 				$("#msg").removeAttr("readOnly")
+				$("#msg").focus()
 			}
 			
 		}		
@@ -147,6 +145,16 @@
 			revMsgFun(revMsg)
 		}
 	}
+	function sendMsg(){
+		if($("#msg").val().length>0){
+			wsocket.send( $("#id").val()+":"+
+					$("#msg").val() )
+			$("#msg").val("").focus()					
+		}else{
+			alert("메시지를 입력하세요!!")
+		}
+		
+	}	
 	function revMsgFun(msg){
 		// 보내는사람아이디:메시지:받는사람아이디
 		// 보내는사람아이디:메시지:그룹
