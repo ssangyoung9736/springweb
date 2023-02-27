@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -62,8 +63,18 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		// 등록된 사용자에서 제거 처리
+
+		byte[] payload = (ids.get(session.getId())+":연결을 종료하였습니다.").getBytes();
 		users.remove(session.getId());
+		WebSocketMessage<?> message = new TextMessage(payload);
+		
+		for(WebSocketSession ws:users.values()) {
+			ws.sendMessage(message);
+			System.out.print(ws.getId()+", ");
+		}		
+		
 		ids.remove(session.getId());
+		
 		System.out.println("#[핸들러메서드:접속종료]"+session.getId());
 	}
 	// 예외 처리
