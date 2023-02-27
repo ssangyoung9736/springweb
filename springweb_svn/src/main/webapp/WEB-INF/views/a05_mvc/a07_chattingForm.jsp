@@ -43,6 +43,7 @@
 		--%>
 		// 화면 로딩시, ajax로 접속된 아이디 출력..
 		conUsers()
+		$("#id").focus()
 		// 이벤트 핸들러 익명 함수 호출
 		// 1. 접속시1(버튼)
 		$("#enterBtn").click(function(){
