@@ -83,7 +83,8 @@
 				conUsers()
 				$("#chatMessageArea").text("")
 				$("#id").val("").focus()
-				$("#id").removeAttr("readOnly","")
+				$("#id").removeAttr("readOnly")
+				$("#msg").attr("readOnly","readOnly")
 			}
 			
 		})
