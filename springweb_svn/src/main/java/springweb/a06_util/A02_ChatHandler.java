@@ -64,7 +64,7 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		// 등록된 사용자에서 제거 처리
-
+		// 브라우저를 통해서 닫거나 버튼을 통해서 접속종료 둘다 처리...
 		byte[] payload = (ids.get(session.getId())+":연결을 종료하였습니다.").getBytes();
 		users.remove(session.getId());
 		WebSocketMessage<?> message = new TextMessage(payload);
