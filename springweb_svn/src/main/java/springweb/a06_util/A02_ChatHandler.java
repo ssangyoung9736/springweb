@@ -36,9 +36,12 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 		// 받은 메시지
 		String msg = (String)message.getPayload();
 		String []msgArry = msg.split(":");
-		/*
+		/* 홍길동:연결 접속했습니다.
+		/* 홍길동:안녕하세요
 		// 연결을 종료하였습니다.
 		// 연결 접속했습니다.
+		 * 
+		 * 서버의 접속아이디와 클라이언트에서 입력한 접속자를 쌍으로 map에서 저장
 		 * */
 		if( msgArry[1].equals("연결 접속했습니다.") ) {
 			ids.put(session.getId(), msgArry[0]);
@@ -86,6 +89,7 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 		
 	}
 	public List<String> getIdx(){
+		// 접속자 명단(클라이언트에서 입력한) 리턴 처리..
 		List<String> list = new ArrayList<String>();
 		for(String id:ids.keySet()) {
 			list.add(ids.get(id));
