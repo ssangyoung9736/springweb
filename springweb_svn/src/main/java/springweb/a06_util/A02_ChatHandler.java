@@ -43,10 +43,11 @@ public class A02_ChatHandler extends TextWebSocketHandler {
 		if( msgArry[1].equals("연결 접속했습니다.") ) {
 			ids.put(session.getId(), msgArry[0]);
 		} 
+		/*
 		if( msgArry[1].equals("연결을 종료하였습니다.") ) {
 			ids.remove(session.getId());
 		}		
-
+		*/
 		System.out.println("#[핸들러메서드:메시지]"+msg);
 		//System.out.println("#[핸들러메서드:접속자]"+memStr);
 		// 전달할 클라이언트에게 전달.
