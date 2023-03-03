@@ -72,6 +72,27 @@ Vue.component("child2-component",{
 		}
 	}
 })
+/*
+이벤트 버스선언(var event= new Vue())  
+<child1-component></child1-component> 
+	첫번째 아들 버튼
+	클릭시 - 화면에 현재시간 출력, child2에 시작전달
+		메서드를 통해서 이벤트 버스에 넘김
+			eventBus.$emit("click1",t)		
+<child2-component></child2-component>
+	리스트로 위 컴포넌트를 클릭시 마다 현재시간 누적 처리
+	1) created:function(){} 컴포넌트가 생성할 때, 처리되는 메서드
+			이벤트 버스를 모니터링
+			eventBus.$on("click1", this.child1Click)
+		click1이라는 이벤트가 발생하면, 현재 이 컴포넌트가 
+		가지고 있는 child1Chick()메서드를 수행처리
+	2) 	child1Click:function(time){
+		// 배열에 클릭시 마다, 시간을 누적 처리
+		this.timelist.push(time)
+	
+ */
+
+
 
 
 	$(document).ready(function(){
