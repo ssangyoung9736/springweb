@@ -35,22 +35,49 @@
 				var d= new Date()
 				var t = d.toLocaleTimeString()+" "+ 
 					d.getMilliseconds()
+				console.log(t)	
 				// 이벤트 버스에 시간을 전송
 				eventBus.$emit("click1",t)
 				this.currentTime= t
-				
 			}
-			
 		}
 	})
-
 </script>
+<!-- 두번째 자식 컴포넌트 시작 -->
+<template id="child2Template">
+	<ul>
+		<li v-for="time in timelist">{{time}}</li>
+	</ul>
+</template>
+<script type="text/javascript"> 
+// child1-component   child2-component
+Vue.component("child2-component",{
+	template:"#child2Template",
+	data:function(){
+		return {
+			timelist:[]
+		}
+	},
+	created:function(){ 
+		// eventBus.$emit("click1",t)
+		// 컴포넌트가 생성될 때, 이벤트 버스 모니터링
+		// 공통 이벤트 버스에서 click이란 이벤트가 오면은
+		// 현재 메서드 child1Click로 전달..
+		eventBus.$on("click1", this.child1Click)
+	},
+	methods:{
+		child1Click:function(time){
+			// 배열에 클릭시 마다, 시간을 누적 처리
+			this.timelist.push(time)
+		}
+	}
+})
 
-<script type="text/javascript">
+
 	$(document).ready(function(){
 		var vm = new Vue({
 			el:".container",
-			data:{msg:"시작!!(뷰와함께)"}
+			data:{msg:"이벤트 버스 연습"}
 		});	
 	});
 </script>
@@ -60,6 +87,10 @@
 <div class="container">
 	<div class="jumbotron text-center">
 	  <h2 >{{msg}}</h2>
+	  <child1-component></child1-component>
+	  <hr/>
+	  <child2-component></child2-component>
+	  
 	</div>
 	<form id="frm01" class="form-inline"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
