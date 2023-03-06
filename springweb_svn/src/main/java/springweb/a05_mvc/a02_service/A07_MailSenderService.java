@@ -29,6 +29,7 @@ public class A07_MailSenderService {
 			mmsg.setRecipient(RecipientType.TO, new InternetAddress(email.getReceiver()));
 			// 3) 내용
 			mmsg.setText(email.getContent());
+			//mmsg.set
 		// 3. 발송처리
 			sender.send(mmsg);
 		} catch (MessagingException e) {

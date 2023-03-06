@@ -39,6 +39,9 @@
 		methods:{
 			addProd:function(){
 				// 이벤트 버스에 시간을 전송
+				// 이벤트버스명.$emit("이벤트명",전달데이터)
+				// 이벤트버스명.$on("이벤트명",선언된기능메서드)
+				// methods:{ 선언된기능메서드:function(받는데이터){}}
 				eventBus.$emit("addclick",this.prod)
 				this.prod=""
 			}
