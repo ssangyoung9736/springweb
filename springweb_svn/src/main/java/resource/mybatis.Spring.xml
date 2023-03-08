@@ -22,6 +22,10 @@
 		<mapper resource="resource/A04_SalMapper.xml"/>
 		<mapper resource="resource/A05_FileMapper.xml"/>
 		<mapper resource="resource/A20_CalendarMapper.xml"/>
+<<<<<<< HEAD
+		
+=======
+>>>>>>> branch 'master' of https://github.com/ssangyoung9736/springweb.git
 	</mappers>
 
 </configuration>
