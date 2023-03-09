@@ -43,34 +43,25 @@
 			
 			# 패쓰 설정을 위한 text
 
-export JAVA_HOME=/home/ubuntu/jdk-17							
-export PATH=$PATH:$JAVA_HOME/bin							
-export CATALINA_HOME=/home/ubuntu/apache-tomcat-9.0.73							
-export PATH=$PATH:$CATALINA_HOME/bin
-ctrl+c로 복사해 놓고
-
-path경로를 설정하기 위한 text 설정 명령어 : /etc/profile에 저장하여야 한다.
-path설정 
-sudo vi /etc/profile
-i 입력을 통해 입력모드로 전환 후  							
-상단으로 이동한 후...마우스오른쪽키로 복사
-esc키 입력을 통해 명령모드로 전환 후
-:wq!
-로 저장 후 종료를 통해서 저장이 되게 한다.
-마지막으로
-source /etc/profile
-을 통해서 적용 후
-java -version
-으로 자바가 바로 명령 처리되는 것을 확인
-					
-11:05 캡쳐합니다.
-계획 제출시 환경설정 다 되었는지(잘 안되고 있으면 어떤 문제인지)와 함께 전달해주세요
-			
-
-
-
-			
-		
+				export JAVA_HOME=/home/ubuntu/jdk-17							
+				export PATH=$PATH:$JAVA_HOME/bin							
+				export CATALINA_HOME=/home/ubuntu/apache-tomcat-9.0.73							
+				export PATH=$PATH:$CATALINA_HOME/bin
+				ctrl+c로 복사해 놓고
+				
+				path경로를 설정하기 위한 text 설정 명령어 : /etc/profile에 저장하여야 한다.
+				path설정 
+				sudo vi /etc/profile
+				i 입력을 통해 입력모드로 전환 후  							
+				상단으로 이동한 후...마우스오른쪽키로 복사
+				esc키 입력을 통해 명령모드로 전환 후
+				:wq!
+				로 저장 후 종료를 통해서 저장이 되게 한다.
+				마지막으로
+				source /etc/profile
+				을 통해서 적용 후
+				java -version
+				으로 자바가 바로 명령 처리되는 것을 확인
 	3) 파일질라 툴을 통한 접속 및 파일 전송
 3. EC2 접속 후, 명령문을 통한 처리
 	1) 기본 리눅스 명령문 확인하기
