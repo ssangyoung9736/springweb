@@ -1,0 +1,85 @@
+# AWS를 통한 웹서버 설정
+1. EC2를 통한 클라우드 환경 설정
+2. EC2 접속을 위한 설정
+	1) AWS 사이트에서 접속 처리
+	2) Putty 툴을 활용할 접속
+		EC2 접속 퍼블릭 주소 확인 : 
+		
+			ec2-15-164-250-150.ap-northeast-2.compute.amazonaws.com	
+			ubuntu@ec2-15-164-250-150.ap-northeast-2.compute.amazonaws.com
+			login as : ubuntu			
+		인바운스 속성 설정 : 외부에서 ec2접속을 위한 보안(방화벽) 기본 명령 port설정 확인, port열기(80,5050포트-웹서버)
+		보안 키 ppk 생성 및 다운로드 : 다운 받아 놓은 위치 확인
+		putty 설정 주소 확인, 보안키 설정 지정
+		접속
+			pwd  
+			현재 경로 확인
+			ls
+			현재 경로의 파일 리스트 명령
+			cd ..
+			상위 경로로 이동
+			cd 특정폴드
+			특정폴드로 이동 처리
+			vi 특정파일
+				특정 파일을 edit 처리
+				sudo vi 특정파일 
+					관리자 권한으로 특정 파일 에디팅 처리
+			sudo apt update
+				sudo : 관리자 권한으로 처리
+				apt update : 기본 os사용하는 소프트웨어 다운로드 처리
+			wget 다운로드할파일링크주소
+				특정웹상에 다운로드할 링크주소를 통해서 해당 파일 다운로드 처리
+				wget https://download.java.net/openjdk/jdk17/ri/openjdk-17+35_linux-x64_bin.tar.gz
+				wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.73/bin/apache-tomcat-9.0.73.tar.gz
+			tar -xvf 압축파일명
+				압축된 파일을 풀어주는 명령문
+				ex) tar -xvf op탭키			
+				ex) tar -xvf ap탭키			
+			# vi 명령어에 의한 실행된 text 파일 변경
+			i키 : 입력모드
+			esc키 : 명령모드
+				:q!  저장없이 종료
+				:wq!  저장 후 종료
+			
+			# 패쓰 설정을 위한 text
+
+export JAVA_HOME=/home/ubuntu/jdk-17							
+export PATH=$PATH:$JAVA_HOME/bin							
+export CATALINA_HOME=/home/ubuntu/apache-tomcat-9.0.73							
+export PATH=$PATH:$CATALINA_HOME/bin
+ctrl+c로 복사해 놓고
+
+path경로를 설정하기 위한 text 설정 명령어 : /etc/profile에 저장하여야 한다.
+path설정 
+sudo vi /etc/profile
+i 입력을 통해 입력모드로 전환 후  							
+상단으로 이동한 후...마우스오른쪽키로 복사
+esc키 입력을 통해 명령모드로 전환 후
+:wq!
+로 저장 후 종료를 통해서 저장이 되게 한다.
+마지막으로
+source /etc/profile
+을 통해서 적용 후
+java -version
+으로 자바가 바로 명령 처리되는 것을 확인
+					
+11:05 캡쳐합니다.
+계획 제출시 환경설정 다 되었는지(잘 안되고 있으면 어떤 문제인지)와 함께 전달해주세요
+			
+
+
+
+			
+		
+	3) 파일질라 툴을 통한 접속 및 파일 전송
+3. EC2 접속 후, 명령문을 통한 처리
+	1) 기본 리눅스 명령문 확인하기
+	2) jdk 다운 로드 및 설치
+	3) tomcat 다운로드 및 설치
+	4) path 잡기
+4. tomcat 서버 확인
+	1) 서버 기동
+	2) tomcat admin 계정 처리를 위한 설정
+	3) 다이나믹 웹 프로젝트 생성 및 buiding 처리(@@@.war 생성)
+	4) tomcat admin manager를 통하 forward
+	5) 서버 확인			
