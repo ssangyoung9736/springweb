@@ -1,7 +1,7 @@
 package springweb.z01_vo;
 
 public class Salgrade {
-	private int grade;
+	private int grade;// grade,losal,hisal
 	private int losal;
 	private int hisal;
 	public int getGrade() {
