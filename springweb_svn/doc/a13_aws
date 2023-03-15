@@ -114,6 +114,50 @@ http://ec2-3-36-64-172.ap-northeast-2.compute.amazonaws.com:8080/
 	2) heidb - 클라이언트 툴
 9. 다이나믹 웹프로젝트를 통해, aws 내  ec2서버와
 	 rds서버를 통해 화면 로딩 처리.
+# rds에서 mariadb 구축 
+# springweb 프로젝트 aws rds 연동 및 ec2 서버 톰캣 빌딩 처리
+1. 스프링 웹 개발 환경 구성
+	0) lib : mariadb연동 jdbc 드라이버 설정
+	1) DB 연동 설정
+		jdbc.driver=org.mariadb.jdbc.Driver
+			마리아디비 driver
+		jdbc.url=jdbc:mariadb://xe.c28gkownqdrz.ap-northeast-2.rds.amazonaws.com:3306/scott?serverTimezone=UTC&characterEncoding=UTF
+			aws내에 rds서버 위치 지정
+		jdbc.user=admin
+			초기에 DB생성시 만든 관리자 계정(default)
+		jdbc.pass=11111111	
+			설정한 비번(8자이상)
+	2) ANSI 형식 공통, 함수에서 차이 확인, 각 db마다 특징적 내용 확인
+		and ename like concat('%',#{ename},'%')
+2. web.war 파일 생성
+3. ec2 서버내 톰캣 가동 해서 관리자 모드 화면에서
+	기존 web.war 삭제 및 web.war 포워등 처리
+4. ec2주소:8080/empList.do 조회 화면 확인	
+
+# springboot로 만든 프로젝파일 aws 서버에 올리기
+1. 스프링부트 환경 설정 완료
+	build.gradle
+		implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+		마리아디비 추가
+	application.properties
+		주소 변경
+		spring.datasource.url=jdbc:mariadb://xe.c28gkownqdrz.ap-northeast-2.rds.amazonaws.com:3306/scott?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+2. 빌드
+	0) springboot빌드를 전제 조건 jdk17
+	1) C:\Users\user\git\bootexp\bootexp\build\libs
+	    @@@.jar  파일을 파일명을 간단하게 변경  boot.jar
+	2) 해당 경로로 cmd로 이동
+		전제 조건 : jdk 17
+		java -jar boot.jar
+		톰캣이 가동된 상태에서 로딩
+	3) 	서버에 이동에 이동해서 해당 소스를 등록
+		java -jar boot.jar
+		를 통해서 원격소스에서 boot로 처리되는 것을 확인..
+		
+			
+
+		
+
 	 		
 	
 	
