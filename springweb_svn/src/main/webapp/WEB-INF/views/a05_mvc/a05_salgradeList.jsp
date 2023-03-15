@@ -31,9 +31,10 @@
 		search()
 	});
 	function search(){
-		$.ajax({
+		$.ajax({ //grade,losal,hisal
 			url:"${path}/salgradeList.do",
 			type:"post",
+			data:{ no:[10,20,30],ck:['Y','N','N'],cont:['내용','수정','변경']},
 			dataType:"json",
 			success:function(data){
 				var slist = data.slist

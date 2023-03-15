@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # AWS를 통한 웹서버 설정
 1. EC2를 통한 클라우드 환경 설정
 2. EC2 접속을 위한 설정
@@ -234,3 +235,175 @@ http://ec2-3-36-64-172.ap-northeast-2.compute.amazonaws.com:8080/
 		
 	
 		
+=======
+# aws 
+1. 지식 계열화
+	1) OS :운영체제에 대한 이해(리눅스, 유닉스 포함)
+		- 개론 : 운영체제의 종류, 사용자 권한 설정,
+			path설정 이유 방법, 방화벽(inbounce, outbounce개념 이해)
+			네트웍 사용 기본 명령어(telnet, ftp) 
+		- 파일 컨트롤 명령
+			파일 복사, 수정, text변경, 프로그램 설정
+			압축 풀기
+	2) 네트웍에 대한 이해
+		- 서버/클라이언트 
+		- 보안 처리 방법
+		- 접속시, 필요한 명령어와 툴
+			putty,  파일질라...
+	3) AWS 
+		- 클라우드 개념에 대한 이해..
+		- ec2 : ubuntu 리눅스 활용
+			인스턴스 생성 : 하드웨어적인 처리(cpu, 메모리)
+				프리미어 서비스
+			보안 처리
+				방화벽 inbounce 처리
+			접근 권한을 위한 key 처리
+				
+			putty를 이용해서 접근 key파일로 접근..	
+			푸티, 파일질라 설치
+			
+				
+			접근시, 명령어를 통해서 필요한 파일 다운로드 처리
+				jdk, tomcat 실행.
+				ex) 실무적으로로 리눅스 유닉스 서버를 기동
+				윈도우 환경에서 개발해서 전송, 서버 내부에서
+				해당 파일을 빌드(전체 컴파일) 및 실행 처리..
+		- rds
+			mysql ==> mariadb(무료)
+			서버로 설정, 클라이언트 툴(heidb)로 접속해서 
+				DB 생성 및 내용 확인
+		- dynamic web 프로젝트 생성된 소스 aws에 forwarding
+			확인 : ec2 고정 도메인 주소로 확인
+		- spring boot 프로젝트 빌드 파일(jar)를 aws에 forwarding
+			해서 실행되어 ec2 고정 도메인 주소로 확인					
+			
+# ec2에서 톰캣 서버 기동 및 배포
+1. putty를 통한 key로 ec2 서버 접근
+	ubuntu@ec2-15-164-250-150.ap-northeast-2.compute.amazonaws.com
+	
+2. jdk, tomcat 설치 및 path 설정
+3. ec2 웹서버실행시 외부에서 접근가능하게 보안 설정(inbounce처리)
+	1) 방화벽 포트 8080 포트 열기
+4. tomcat 서버에 접근 권한 설정 파일 변경
+	1) 접근 처리 ip 설정
+		cd 톰캣폴드 이동
+		vi webapps/manager/META-INF/context.xml
+			주소 부분을 처리
+    <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="\d+\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+		==>  allow="\d+\.  현재는 127로 되어 있습니다.	
+	
+		vi
+			esc : 명령모드
+				:wq!
+					저장후 종료
+				:q!
+					종료
+			i : 입력모드
+				오른쪽 마우스 클릭 : 복사된 내용 붙이기..
+	2) 톰캣 서버 기동
+		메인 폴드로 이동 후
+		cd bin	
+		./startup.sh   : 실행 명령어
+		./shutdown.sh : 종료 명령어
+		
+http://ec2-3-36-64-172.ap-northeast-2.compute.amazonaws.com:8080/		
+		
+5. 관리자 권한으로 배포 처리
+	1) dynamic web 프로젝트 간단하에 예제 파일 만들기
+		- 초기화면 로딩 화면구현.
+		- export ==> web.war 파일 생성
+	2) ec2서버의 톰캣 관리자 권한 변경 부분 변경.
+		<role rolename="manager-gui"/>
+		<user username="admin" password="admin" roles="manager-gui"/>		
+		pwd 
+		톰캣의 상위 폴드 확인	
+		vi conf/tomcat-users.xml
+		i  입력모드 :오른쪽 마우스 클릭으로 붙이기
+		<tomcat-users  version="" >
+		
+			<role rolename="manager-gui"/>
+			<user username="admin" password="admin" roles="manager-gui"/>		
+			<!--
+					
+		esc 키입력 해서 명령모드
+		
+		:wq!  : 저장 후 종료
+
+		cd bin
+		./shutdown.sh
+		./startup.sh		
+		
+		복사해서 배포할 수 있는 관리자 메뉴를 접근 가능하게 처리
+	3) 톰캣 서버 기동 후 관리자 메뉴로 admin 비번 입력 후..
+		접근
+		cd bin
+		./shutdown.sh
+		./startup.sh
+	4) 다이나믹 웹프로젝트로 만든 web.war 배포 및 확인
+6. 기존 게시판...DB 고정 아이피 주소에 
+	board테이블이 만들어 있어야 합니다. 아이피 setting
+	0) db 서버 고정 ip 주소로 setting
+	1) ec2 DB서버 정보로 지역 정보를 timezone으로 설정해서
+	2) board.war 생성, 톰캣에 배포 처리.
+7. 파일젤라를 통해 서버 접근 파일 업로드 다운로드
+8. rds
+	1) mariadb 설치
+	2) heidb - 클라이언트 툴
+9. 다이나믹 웹프로젝트를 통해, aws 내  ec2서버와
+	 rds서버를 통해 화면 로딩 처리.
+# rds에서 mariadb 구축 
+# springweb 프로젝트 aws rds 연동 및 ec2 서버 톰캣 빌딩 처리
+1. 스프링 웹 개발 환경 구성
+	0) lib : mariadb연동 jdbc 드라이버 설정
+	1) DB 연동 설정
+		jdbc.driver=org.mariadb.jdbc.Driver
+			마리아디비 driver
+		jdbc.url=jdbc:mariadb://xe.c28gkownqdrz.ap-northeast-2.rds.amazonaws.com:3306/scott?serverTimezone=UTC&characterEncoding=UTF
+			aws내에 rds서버 위치 지정
+		jdbc.user=admin
+			초기에 DB생성시 만든 관리자 계정(default)
+		jdbc.pass=11111111	
+			설정한 비번(8자이상)
+	2) ANSI 형식 공통, 함수에서 차이 확인, 각 db마다 특징적 내용 확인
+		and ename like concat('%',#{ename},'%')
+2. web.war 파일 생성
+3. ec2 서버내 톰캣 가동 해서 관리자 모드 화면에서
+	기존 web.war 삭제 및 web.war 포워등 처리
+4. ec2주소:8080/empList.do 조회 화면 확인	
+
+# springboot로 만든 프로젝파일 aws 서버에 올리기
+1. 스프링부트 환경 설정 완료
+	build.gradle
+		implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+		마리아디비 추가
+	application.properties
+		주소 변경
+		spring.datasource.url=jdbc:mariadb://xe.c28gkownqdrz.ap-northeast-2.rds.amazonaws.com:3306/scott?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+2. 빌드
+	0) springboot빌드를 전제 조건 jdk17
+	1) C:\Users\user\git\bootexp\bootexp\build\libs
+	    @@@.jar  파일을 파일명을 간단하게 변경  boot.jar
+	2) 해당 경로로 cmd로 이동
+		전제 조건 : jdk 17
+		java -jar boot.jar
+		톰캣이 가동된 상태에서 로딩
+	3) 	서버에 이동에 이동해서 해당 소스를 등록
+		java -jar boot.jar
+		를 통해서 원격소스에서 boot로 처리되는 것을 확인..
+		
+			
+
+		
+
+	 		
+	
+	
+		
+		
+		
+		
+							
+			
+		
+>>>>>>> branch 'master' of https://github.com/ssangyoung9736/springweb.git
