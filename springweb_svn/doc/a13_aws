@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AWS를 통한 웹서버 설정
 1. EC2를 통한 클라우드 환경 설정
 2. EC2 접속을 위한 설정
@@ -74,3 +75,162 @@
 	3) 다이나믹 웹 프로젝트 생성 및 buiding 처리(@@@.war 생성)
 	4) tomcat admin manager를 통하 forward
 	5) 서버 확인			
+=======
+# aws 
+1. 지식 계열화
+	1) OS :운영체제에 대한 이해(리눅스, 유닉스 포함)
+		- 개론 : 운영체제의 종류, 사용자 권한 설정,
+			path설정 이유 방법, 방화벽(inbounce, outbounce개념 이해)
+			네트웍 사용 기본 명령어(telnet, ftp) 
+		- 파일 컨트롤 명령
+			파일 복사, 수정, text변경, 프로그램 설정
+			압축 풀기
+	2) 네트웍에 대한 이해
+		- 서버/클라이언트 
+		- 보안 처리 방법
+		- 접속시, 필요한 명령어와 툴
+			putty,  파일질라...
+	3) AWS 
+		- 클라우드 개념에 대한 이해..
+		- ec2 : ubuntu 리눅스 활용
+			인스턴스 생성 : 하드웨어적인 처리(cpu, 메모리)
+				프리미어 서비스
+			보안 처리
+				방화벽 inbounce 처리
+			접근 권한을 위한 key 처리
+				
+			putty를 이용해서 접근 key파일로 접근..	
+			푸티, 파일질라 설치
+			
+				
+			접근시, 명령어를 통해서 필요한 파일 다운로드 처리
+				jdk, tomcat 실행.
+				ex) 실무적으로로 리눅스 유닉스 서버를 기동
+				윈도우 환경에서 개발해서 전송, 서버 내부에서
+				해당 파일을 빌드(전체 컴파일) 및 실행 처리..
+		- rds
+			mysql ==> mariadb(무료)
+			서버로 설정, 클라이언트 툴(heidb)로 접속해서 
+				DB 생성 및 내용 확인
+		- dynamic web 프로젝트 생성된 소스 aws에 forwarding
+			확인 : ec2 고정 도메인 주소로 확인
+		- spring boot 프로젝트 빌드 파일(jar)를 aws에 forwarding
+			해서 실행되어 ec2 고정 도메인 주소로 확인					
+			
+# ec2에서 톰캣 서버 기동 및 배포
+1. putty를 통한 key로 ec2 서버 접근
+	ubuntu@ec2-15-164-250-150.ap-northeast-2.compute.amazonaws.com
+	
+2. jdk, tomcat 설치 및 path 설정
+3. ec2 웹서버실행시 외부에서 접근가능하게 보안 설정(inbounce처리)
+	1) 방화벽 포트 8080 포트 열기
+4. tomcat 서버에 접근 권한 설정 파일 변경
+	1) 접근 처리 ip 설정
+		cd 톰캣폴드 이동
+		vi webapps/manager/META-INF/context.xml
+			주소 부분을 처리
+    <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="\d+\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+		==>  allow="\d+\.  현재는 127로 되어 있습니다.	
+	
+		vi
+			esc : 명령모드
+				:wq!
+					저장후 종료
+				:q!
+					종료
+			i : 입력모드
+				오른쪽 마우스 클릭 : 복사된 내용 붙이기..
+	2) 톰캣 서버 기동
+		메인 폴드로 이동 후
+		cd bin	
+		./startup.sh   : 실행 명령어
+		./shutdown.sh : 종료 명령어
+		
+http://ec2-3-36-64-172.ap-northeast-2.compute.amazonaws.com:8080/		
+		
+5. 관리자 권한으로 배포 처리
+	1) dynamic web 프로젝트 간단하에 예제 파일 만들기
+		- 초기화면 로딩 화면구현.
+		- export ==> web.war 파일 생성
+	2) ec2서버의 톰캣 관리자 권한 변경 부분 변경.
+		<role rolename="manager-gui"/>
+		<user username="admin" password="admin" roles="manager-gui"/>		
+		pwd 
+		톰캣의 상위 폴드 확인	
+		vi conf/tomcat-users.xml
+		i  입력모드 :오른쪽 마우스 클릭으로 붙이기
+		<tomcat-users  version="" >
+		
+			<role rolename="manager-gui"/>
+			<user username="admin" password="admin" roles="manager-gui"/>		
+			<!--
+					
+		esc 키입력 해서 명령모드
+		
+		:wq!  : 저장 후 종료
+
+		cd bin
+		./shutdown.sh
+		./startup.sh		
+		
+		복사해서 배포할 수 있는 관리자 메뉴를 접근 가능하게 처리
+	3) 톰캣 서버 기동 후 관리자 메뉴로 admin 비번 입력 후..
+		접근
+		cd bin
+		./shutdown.sh
+		./startup.sh
+	4) 다이나믹 웹프로젝트로 만든 web.war 배포 및 확인
+6. 기존 게시판...DB 고정 아이피 주소에 
+	board테이블이 만들어 있어야 합니다. 아이피 setting
+	0) db 서버 고정 ip 주소로 setting
+	1) ec2 DB서버 정보로 지역 정보를 timezone으로 설정해서
+	2) board.war 생성, 톰캣에 배포 처리.
+7. 파일젤라를 통해 서버 접근 파일 업로드 다운로드
+8. rds
+	1) mariadb 설치
+	2) heidb - 클라이언트 툴
+9. 다이나믹 웹프로젝트를 통해, aws 내  ec2서버와
+	 rds서버를 통해 화면 로딩 처리.
+	 		
+# RDS 
+1. 원격접속 도메인명
+	엔드포인트 : xe.c28gkownqdrz.ap-northeast-2.rds.amazonaws.com
+2. 계정 :
+	1) 초기에 설정한 관리자 계정
+		admin 
+		==> 생성계정(스키마)를 만들면 해당 계정명으로 접근할 수 있다.
+			ex) heidbSQL에서 생성
+	2) 비밀번호 : 11111111		
+3. 보안그룹
+	VPC : 윈도우 운영체제의 방화벽을 통해서 외부에서 접근하거나, 내부에서 외부로
+		접근하는 port에 대한 허용을 처리하는 부분
+	inbounce를 통해서 3306(maridb기본 port)로 외부에서 접근이 가능하고 
+		대상자를 어떤 ip에 있는 경우로 다 접근할 수 있게 0.0.0.0/0	
+4. 외부 db client를 통한 서버 접근
+	1) heidiSQL 툴을 통해 접근.
+		고정IP주소(도메인명) : AWS의 엔드 포인트
+		계정 : 스카마생성 전에는 관리자 계정접근 admin//11111111
+			DB 생성 : ex) scott
+	2) 테이블만들기
+		sql - ANSI 형식 : 공통이기에 사용 가능
+		툴에서 지원하는 테이블 생성으로 처리 가능
+	3) 데이터 입력 처리
+	4) sql 확인
+5. dynamic web 프로젝트를 통해서 DB 접근하여 처리, *.war 생성
+	1) 기존 **board나 springweb에서 스프링 환경으로 설정 처리
+	2) 대상 web 프로젝트에 springweb에 있는 스프링 환경 설정 파일 복사(아래 폴드 복사) 
+		1) src\main\webapp\WEB-INF
+		2) src\main\webapp\a00_com
+		3) controller 위치 설정
+	3) 사원 정보를 기본 조회하는 화면 구성.
+			
+		
+
+
+6. aws에 해당 프로젝트 관리자 모드에서 loading
+
+			
+		
+	
+		

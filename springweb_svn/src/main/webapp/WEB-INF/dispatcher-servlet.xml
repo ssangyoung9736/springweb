@@ -49,10 +49,10 @@
 	 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>	
-		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>	
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver"/>	
+		<property name="url" value="jdbc:mariadb://127.0.0.1:3306/coffee/xe"/>	
 		<property name="username" value="scott"/>	
-		<property name="password" value="tiger"/>	
+		<property name="password" value="11111111"/>	
 	</bean>	 
 	<!-- 
 	# Mybatis연동
